@@ -1,0 +1,1024 @@
+{
+    "nodes": [
+        {
+            "deviceId": 3232,
+            "deviceName": "공주센터(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.8",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3233,
+            "deviceName": "광주센터(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.7",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3234,
+            "deviceName": "대구센터(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.6",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3235,
+            "deviceName": "대전센터(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.5",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3236,
+            "deviceName": "공주센터(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.8",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3237,
+            "deviceName": "광주센터(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.7",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3238,
+            "deviceName": "대구센터(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.6",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3239,
+            "deviceName": "대전센터(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.5",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3240,
+            "deviceName": "공주센터2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.27",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3241,
+            "deviceName": "공주센터1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.26",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3242,
+            "deviceName": "광주센터3(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.43",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3243,
+            "deviceName": "광주센터2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.42",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3244,
+            "deviceName": "광주센터1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.41",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3245,
+            "deviceName": "대구센터2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.37",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3246,
+            "deviceName": "대구센터1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.36",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3247,
+            "deviceName": "광주센터3(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.43",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3248,
+            "deviceName": "대구센터2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.37",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3249,
+            "deviceName": "광주센터2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.42",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3250,
+            "deviceName": "광주센터1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.41",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3251,
+            "deviceName": "대전센터3(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.23",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3252,
+            "deviceName": "대전센터1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.21",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3253,
+            "deviceName": "대구센터1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.36",
+            "deviceGroupId": 40
+        },
+        {
+            "deviceId": 3254,
+            "deviceName": "대전센터2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.22",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3255,
+            "deviceName": "공주센터1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.26",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3256,
+            "deviceName": "대전센터2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.22",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3257,
+            "deviceName": "공주센터2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.27",
+            "deviceGroupId": 34
+        },
+        {
+            "deviceId": 3258,
+            "deviceName": "대전센터1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.21",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3259,
+            "deviceName": "대전센터3(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.23",
+            "deviceGroupId": 33
+        },
+        {
+            "deviceId": 3260,
+            "deviceName": "제주도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.186",
+            "deviceGroupId": 48
+        },
+        {
+            "deviceId": 3261,
+            "deviceName": "인천시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.185",
+            "deviceGroupId": 18
+        },
+        {
+            "deviceId": 3262,
+            "deviceName": "경기도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.184",
+            "deviceGroupId": 14
+        },
+        {
+            "deviceId": 3263,
+            "deviceName": "충남도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.183",
+            "deviceGroupId": 15
+        },
+        {
+            "deviceId": 3264,
+            "deviceName": "세종시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.182",
+            "deviceGroupId": 16
+        },
+        {
+            "deviceId": 3265,
+            "deviceName": "전북도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.181",
+            "deviceGroupId": 35
+        },
+        {
+            "deviceId": 3266,
+            "deviceName": "전남도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.180",
+            "deviceGroupId": 36
+        },
+        {
+            "deviceId": 3267,
+            "deviceName": "광주시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.179",
+            "deviceGroupId": 37
+        },
+        {
+            "deviceId": 3268,
+            "deviceName": "경남도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.178",
+            "deviceGroupId": 45
+        },
+        {
+            "deviceId": 3269,
+            "deviceName": "부산시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.177",
+            "deviceGroupId": 44
+        },
+        {
+            "deviceId": 3270,
+            "deviceName": "울산시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.176",
+            "deviceGroupId": 43
+        },
+        {
+            "deviceId": 3271,
+            "deviceName": "대전청사#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.169",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3272,
+            "deviceName": "대구시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.175",
+            "deviceGroupId": 41
+        },
+        {
+            "deviceId": 3273,
+            "deviceName": "대전시청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.173",
+            "deviceGroupId": 27
+        },
+        {
+            "deviceId": 3274,
+            "deviceName": "충북도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.172",
+            "deviceGroupId": 30
+        },
+        {
+            "deviceId": 3275,
+            "deviceName": "강원도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.171",
+            "deviceGroupId": 24
+        },
+        {
+            "deviceId": 3276,
+            "deviceName": "경북도청#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.174",
+            "deviceGroupId": 31
+        },
+        {
+            "deviceId": 3277,
+            "deviceName": "서울청사#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.166",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3278,
+            "deviceName": "과천청사#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.168",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3279,
+            "deviceName": "세종청사#E1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.167",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3280,
+            "deviceName": "경북도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.121",
+            "deviceGroupId": 31
+        },
+        {
+            "deviceId": 3281,
+            "deviceName": "전남도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.106",
+            "deviceGroupId": 36
+        },
+        {
+            "deviceId": 3282,
+            "deviceName": "충북도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.71",
+            "deviceGroupId": 30
+        },
+        {
+            "deviceId": 3283,
+            "deviceName": "경북도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.121",
+            "deviceGroupId": 31
+        },
+        {
+            "deviceId": 3284,
+            "deviceName": "전남도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.106",
+            "deviceGroupId": 36
+        },
+        {
+            "deviceId": 3285,
+            "deviceName": "경남도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.146",
+            "deviceGroupId": 45
+        },
+        {
+            "deviceId": 3286,
+            "deviceName": "충북도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.71",
+            "deviceGroupId": 30
+        },
+        {
+            "deviceId": 3287,
+            "deviceName": "전북도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.101",
+            "deviceGroupId": 35
+        },
+        {
+            "deviceId": 3288,
+            "deviceName": "강원도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.51",
+            "deviceGroupId": 24
+        },
+        {
+            "deviceId": 3289,
+            "deviceName": "경남도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.146",
+            "deviceGroupId": 45
+        },
+        {
+            "deviceId": 3290,
+            "deviceName": "경기도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.86",
+            "deviceGroupId": 14
+        },
+        {
+            "deviceId": 3291,
+            "deviceName": "전북도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.101",
+            "deviceGroupId": 35
+        },
+        {
+            "deviceId": 3292,
+            "deviceName": "제주도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.161",
+            "deviceGroupId": 48
+        },
+        {
+            "deviceId": 3293,
+            "deviceName": "제주도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.161",
+            "deviceGroupId": 48
+        },
+        {
+            "deviceId": 3294,
+            "deviceName": "강원도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.51",
+            "deviceGroupId": 24
+        },
+        {
+            "deviceId": 3295,
+            "deviceName": "충남도청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.91",
+            "deviceGroupId": 15
+        },
+        {
+            "deviceId": 3296,
+            "deviceName": "경기도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.86",
+            "deviceGroupId": 14
+        },
+        {
+            "deviceId": 3297,
+            "deviceName": "충남도청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.91",
+            "deviceGroupId": 15
+        },
+        {
+            "deviceId": 3298,
+            "deviceName": "광양시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.156",
+            "deviceGroupId": 47
+        },
+        {
+            "deviceId": 3299,
+            "deviceName": "인천시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.81",
+            "deviceGroupId": 18
+        },
+        {
+            "deviceId": 3300,
+            "deviceName": "진주시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.151",
+            "deviceGroupId": 46
+        },
+        {
+            "deviceId": 3301,
+            "deviceName": "부산시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.141",
+            "deviceGroupId": 44
+        },
+        {
+            "deviceId": 3302,
+            "deviceName": "울산시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.136",
+            "deviceGroupId": 43
+        },
+        {
+            "deviceId": 3303,
+            "deviceName": "대구시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.131",
+            "deviceGroupId": 41
+        },
+        {
+            "deviceId": 3304,
+            "deviceName": "포항시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.126",
+            "deviceGroupId": 42
+        },
+        {
+            "deviceId": 3305,
+            "deviceName": "원주시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.61",
+            "deviceGroupId": 25
+        },
+        {
+            "deviceId": 3306,
+            "deviceName": "구미시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.116",
+            "deviceGroupId": 32
+        },
+        {
+            "deviceId": 3307,
+            "deviceName": "대전시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.76",
+            "deviceGroupId": 27
+        },
+        {
+            "deviceId": 3308,
+            "deviceName": "충주시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.66",
+            "deviceGroupId": 29
+        },
+        {
+            "deviceId": 3309,
+            "deviceName": "원주시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.61",
+            "deviceGroupId": 25
+        },
+        {
+            "deviceId": 3310,
+            "deviceName": "서울시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.46",
+            "deviceGroupId": 23
+        },
+        {
+            "deviceId": 3311,
+            "deviceName": "충주시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.66",
+            "deviceGroupId": 29
+        },
+        {
+            "deviceId": 3312,
+            "deviceName": "대구시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.131",
+            "deviceGroupId": 41
+        },
+        {
+            "deviceId": 3313,
+            "deviceName": "구미시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.116",
+            "deviceGroupId": 32
+        },
+        {
+            "deviceId": 3314,
+            "deviceName": "인천시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.81",
+            "deviceGroupId": 18
+        },
+        {
+            "deviceId": 3315,
+            "deviceName": "서울시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.46",
+            "deviceGroupId": 23
+        },
+        {
+            "deviceId": 3316,
+            "deviceName": "강릉시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.56",
+            "deviceGroupId": 28
+        },
+        {
+            "deviceId": 3317,
+            "deviceName": "광양시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.156",
+            "deviceGroupId": 47
+        },
+        {
+            "deviceId": 3318,
+            "deviceName": "세종시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.96",
+            "deviceGroupId": 16
+        },
+        {
+            "deviceId": 3319,
+            "deviceName": "진주시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.151",
+            "deviceGroupId": 46
+        },
+        {
+            "deviceId": 3320,
+            "deviceName": "울산시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.136",
+            "deviceGroupId": 43
+        },
+        {
+            "deviceId": 3321,
+            "deviceName": "포항시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.126",
+            "deviceGroupId": 42
+        },
+        {
+            "deviceId": 3322,
+            "deviceName": "광주시청(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.111",
+            "deviceGroupId": 37
+        },
+        {
+            "deviceId": 3323,
+            "deviceName": "대전시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.76",
+            "deviceGroupId": 27
+        },
+        {
+            "deviceId": 3324,
+            "deviceName": "광주시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.111",
+            "deviceGroupId": 37
+        },
+        {
+            "deviceId": 3325,
+            "deviceName": "강릉시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.56",
+            "deviceGroupId": 28
+        },
+        {
+            "deviceId": 3326,
+            "deviceName": "세종시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.96",
+            "deviceGroupId": 16
+        },
+        {
+            "deviceId": 3327,
+            "deviceName": "부산시청(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.141",
+            "deviceGroupId": 44
+        },
+        {
+            "deviceId": 3328,
+            "deviceName": "광주센터-지하1층#3 IP-MPLS",
+            "deviceIpAddr": "25.9.5.51",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3329,
+            "deviceName": "환경부#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.21",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3330,
+            "deviceName": "관세청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.14",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3331,
+            "deviceName": "광주센터-지하1층#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.50",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3332,
+            "deviceName": "식품의약품안전처#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.48",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3333,
+            "deviceName": "기상청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.7",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3334,
+            "deviceName": "질병관리청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.46",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3335,
+            "deviceName": "국립농산물품질관리원#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.43",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3336,
+            "deviceName": "국립종자원#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.40",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3337,
+            "deviceName": "조달청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.17",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3338,
+            "deviceName": "광주센터-지하1층#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.49",
+            "deviceGroupId": 39
+        },
+        {
+            "deviceId": 3339,
+            "deviceName": "국립종자원#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.39",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3340,
+            "deviceName": "농림축산검역본부#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.41",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3341,
+            "deviceName": "조달청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.16",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3342,
+            "deviceName": "환경부#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.22",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3343,
+            "deviceName": "소방청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.26",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3344,
+            "deviceName": "산림청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.13",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3345,
+            "deviceName": "행안부#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.18",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3346,
+            "deviceName": "관세청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.15",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3348,
+            "deviceName": "농림축산검역본부#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.42",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3350,
+            "deviceName": "환경부 국립환경과학원#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.36",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3351,
+            "deviceName": "산림청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.12",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3352,
+            "deviceName": "질병관리청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.45",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3353,
+            "deviceName": "기상청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.8",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3354,
+            "deviceName": "법무부#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.1",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3355,
+            "deviceName": "식품의약품안전처#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.47",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3356,
+            "deviceName": "국립농산물품질관리원#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.44",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3357,
+            "deviceName": "해양경찰청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.33",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3358,
+            "deviceName": "해양경찰청#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.34",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3359,
+            "deviceName": "통일부#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.3",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3360,
+            "deviceName": "환경부#3 IP-MPLS",
+            "deviceIpAddr": "25.9.5.23",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3361,
+            "deviceName": "환경부 국립환경과학원#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.35",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3362,
+            "deviceName": "행안부#3 IP-MPLS",
+            "deviceIpAddr": "25.9.5.20",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3365,
+            "deviceName": "환경부#4 IP-MPLS",
+            "deviceIpAddr": "25.9.5.24",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3366,
+            "deviceName": "통일부#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.4",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3367,
+            "deviceName": "소방청#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.25",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3369,
+            "deviceName": "법무부#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.2",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3370,
+            "deviceName": "행안부#2 IP-MPLS",
+            "deviceIpAddr": "25.9.5.19",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3371,
+            "deviceName": "세종청사(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.9",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3372,
+            "deviceName": "과천청사1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.1",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3373,
+            "deviceName": "대전청사(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.4",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3374,
+            "deviceName": "서울청사(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.3",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3375,
+            "deviceName": "서울별관(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.2",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3376,
+            "deviceName": "서울별관(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.2",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3377,
+            "deviceName": "대전청사(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.4",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3378,
+            "deviceName": "과천청사1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.1",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3379,
+            "deviceName": "과천청사(부) IP-MPLS",
+            "deviceIpAddr": "25.9.4.1",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3380,
+            "deviceName": "서울청사(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.3",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3381,
+            "deviceName": "세종청사(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.9",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3382,
+            "deviceName": "대전청사2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.17",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3383,
+            "deviceName": "대전청사1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.16",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3384,
+            "deviceName": "대전청사1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.16",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3385,
+            "deviceName": "서울청사2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.12",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3386,
+            "deviceName": "세종청사2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.32",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3387,
+            "deviceName": "서울청사1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.11",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3388,
+            "deviceName": "서울별관2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.7",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3389,
+            "deviceName": "서울청사2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.12",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3390,
+            "deviceName": "세종청사1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.31",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3391,
+            "deviceName": "대전청사2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.17",
+            "deviceGroupId": 22
+        },
+        {
+            "deviceId": 3392,
+            "deviceName": "세종청사1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.31",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3393,
+            "deviceName": "세종청사2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.32",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3394,
+            "deviceName": "서울별관1(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.6",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3395,
+            "deviceName": "과천청사2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.2",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3396,
+            "deviceName": "서울청사1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.11",
+            "deviceGroupId": 21
+        },
+        {
+            "deviceId": 3397,
+            "deviceName": "서울별관1(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.6",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3398,
+            "deviceName": "과천청사(주) IP-MPLS",
+            "deviceIpAddr": "25.9.3.1",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3399,
+            "deviceName": "과천청사2(부) IP-MPLS",
+            "deviceIpAddr": "25.9.2.2",
+            "deviceGroupId": 19
+        },
+        {
+            "deviceId": 3400,
+            "deviceName": "서울별관2(주) IP-MPLS",
+            "deviceIpAddr": "25.9.1.7",
+            "deviceGroupId": 20
+        },
+        {
+            "deviceId": 3401,
+            "deviceName": "세종청사#E1_1 IP-MPLS",
+            "deviceIpAddr": "25.9.1.187",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3402,
+            "deviceName": "세종청사#E1_2 IP-MPLS",
+            "deviceIpAddr": "25.9.1.188",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3403,
+            "deviceName": "세종청사#E1_3 IP-MPLS",
+            "deviceIpAddr": "25.9.1.189",
+            "deviceGroupId": 17
+        },
+        {
+            "deviceId": 3404,
+            "deviceName": "대구센터-EXT1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.52",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3405,
+            "deviceName": "국립재난안전연구원 IP-MPLS",
+            "deviceIpAddr": "25.9.5.54",
+            "deviceGroupId": 13
+        },
+        {
+            "deviceId": 3406,
+            "deviceName": "강원도청-전진#1 IP-MPLS",
+            "deviceIpAddr": "25.9.5.55",
+            "deviceGroupId": 13
+        }
+    ]
+}

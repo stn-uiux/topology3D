@@ -1,0 +1,774 @@
+{
+  "groups": [
+    {
+      "groupId": 101,
+      "groupName": "Seoul HQ"
+    },
+    {
+      "groupId": 102,
+      "groupName": "Busan Branch"
+    },
+    {
+      "groupId": 103,
+      "groupName": "Daegu Branch"
+    },
+    {
+      "groupId": 104,
+      "groupName": "Daejeon Hub"
+    },
+    {
+      "groupId": 105,
+      "groupName": "Incheon Branch"
+    },
+    {
+      "groupId": 106,
+      "groupName": "Gwangju Hub"
+    },
+    {
+      "groupId": 107,
+      "groupName": "Ulsan Branch"
+    },
+    {
+      "groupId": 108,
+      "groupName": "Sejong Center"
+    },
+    {
+      "groupId": 109,
+      "groupName": "Gyeonggi North"
+    },
+    {
+      "groupId": 110,
+      "groupName": "Gyeonggi South"
+    },
+    {
+      "groupId": 111,
+      "groupName": "Gangwon Branch"
+    },
+    {
+      "groupId": 112,
+      "groupName": "Chungbuk Branch"
+    },
+    {
+      "groupId": 113,
+      "groupName": "Jeonbuk Branch"
+    },
+    {
+      "groupId": 114,
+      "groupName": "Jeju Center"
+    }
+  ],
+  "nodes": [
+    {
+      "deviceId": 1001,
+      "deviceName": "Seoul-SW1",
+      "deviceGroupId": 101
+    },
+    {
+      "deviceId": 1002,
+      "deviceName": "Seoul-SW2",
+      "deviceGroupId": 101
+    },
+    {
+      "deviceId": 1003,
+      "deviceName": "Seoul-SW3",
+      "deviceGroupId": 101
+    },
+    {
+      "deviceId": 1004,
+      "deviceName": "Busan-SW1",
+      "deviceGroupId": 102
+    },
+    {
+      "deviceId": 1005,
+      "deviceName": "Busan-SW2",
+      "deviceGroupId": 102
+    },
+    {
+      "deviceId": 1006,
+      "deviceName": "Busan-SW3",
+      "deviceGroupId": 102
+    },
+    {
+      "deviceId": 1007,
+      "deviceName": "Daegu-SW1",
+      "deviceGroupId": 103
+    },
+    {
+      "deviceId": 1008,
+      "deviceName": "Daegu-SW2",
+      "deviceGroupId": 103
+    },
+    {
+      "deviceId": 1009,
+      "deviceName": "Daejeon-SW1",
+      "deviceGroupId": 104
+    },
+    {
+      "deviceId": 1010,
+      "deviceName": "Daejeon-SW2",
+      "deviceGroupId": 104
+    },
+    {
+      "deviceId": 1011,
+      "deviceName": "Daejeon-SW3",
+      "deviceGroupId": 104
+    },
+    {
+      "deviceId": 1012,
+      "deviceName": "Incheon-SW1",
+      "deviceGroupId": 105
+    },
+    {
+      "deviceId": 1013,
+      "deviceName": "Incheon-SW2",
+      "deviceGroupId": 105
+    },
+    {
+      "deviceId": 1014,
+      "deviceName": "Incheon-SW3",
+      "deviceGroupId": 105
+    },
+    {
+      "deviceId": 1015,
+      "deviceName": "Incheon-SW4",
+      "deviceGroupId": 105
+    },
+    {
+      "deviceId": 1016,
+      "deviceName": "Gwangju-SW1",
+      "deviceGroupId": 106
+    },
+    {
+      "deviceId": 1017,
+      "deviceName": "Gwangju-SW2",
+      "deviceGroupId": 106
+    },
+    {
+      "deviceId": 1018,
+      "deviceName": "Gwangju-SW3",
+      "deviceGroupId": 106
+    },
+    {
+      "deviceId": 1019,
+      "deviceName": "Gwangju-SW4",
+      "deviceGroupId": 106
+    },
+    {
+      "deviceId": 1020,
+      "deviceName": "Ulsan-SW1",
+      "deviceGroupId": 107
+    },
+    {
+      "deviceId": 1021,
+      "deviceName": "Ulsan-SW2",
+      "deviceGroupId": 107
+    },
+    {
+      "deviceId": 1022,
+      "deviceName": "Sejong-SW1",
+      "deviceGroupId": 108
+    },
+    {
+      "deviceId": 1023,
+      "deviceName": "Sejong-SW2",
+      "deviceGroupId": 108
+    },
+    {
+      "deviceId": 1024,
+      "deviceName": "Gyeonggi-SW1",
+      "deviceGroupId": 109
+    },
+    {
+      "deviceId": 1025,
+      "deviceName": "Gyeonggi-SW2",
+      "deviceGroupId": 109
+    },
+    {
+      "deviceId": 1026,
+      "deviceName": "Gyeonggi-SW1",
+      "deviceGroupId": 110
+    },
+    {
+      "deviceId": 1027,
+      "deviceName": "Gyeonggi-SW2",
+      "deviceGroupId": 110
+    },
+    {
+      "deviceId": 1028,
+      "deviceName": "Gyeonggi-SW3",
+      "deviceGroupId": 110
+    },
+    {
+      "deviceId": 1029,
+      "deviceName": "Gyeonggi-SW4",
+      "deviceGroupId": 110
+    },
+    {
+      "deviceId": 1030,
+      "deviceName": "Gangwon-SW1",
+      "deviceGroupId": 111
+    },
+    {
+      "deviceId": 1031,
+      "deviceName": "Gangwon-SW2",
+      "deviceGroupId": 111
+    },
+    {
+      "deviceId": 1032,
+      "deviceName": "Gangwon-SW3",
+      "deviceGroupId": 111
+    },
+    {
+      "deviceId": 1033,
+      "deviceName": "Chungbuk-SW1",
+      "deviceGroupId": 112
+    },
+    {
+      "deviceId": 1034,
+      "deviceName": "Chungbuk-SW2",
+      "deviceGroupId": 112
+    },
+    {
+      "deviceId": 1035,
+      "deviceName": "Chungbuk-SW3",
+      "deviceGroupId": 112
+    },
+    {
+      "deviceId": 1036,
+      "deviceName": "Chungbuk-SW4",
+      "deviceGroupId": 112
+    },
+    {
+      "deviceId": 1037,
+      "deviceName": "Jeonbuk-SW1",
+      "deviceGroupId": 113
+    },
+    {
+      "deviceId": 1038,
+      "deviceName": "Jeonbuk-SW2",
+      "deviceGroupId": 113
+    },
+    {
+      "deviceId": 1039,
+      "deviceName": "Jeju-SW1",
+      "deviceGroupId": 114
+    },
+    {
+      "deviceId": 1040,
+      "deviceName": "Jeju-SW2",
+      "deviceGroupId": 114
+    }
+  ],
+  "links": [
+    {
+      "srcDeviceId": 1001,
+      "dstDeviceId": 1002,
+      "srcInterfaceId": 5000,
+      "dstInterfaceId": 5001,
+      "srcInterfaceName": "Ge-0/0/8",
+      "dstInterfaceName": "Ge-0/0/9",
+      "srcInterfaceIpAddr": "10.0.236.155",
+      "dstInterfaceIpAddr": "10.0.237.156"
+    },
+    {
+      "srcDeviceId": 1002,
+      "dstDeviceId": 1003,
+      "srcInterfaceId": 5002,
+      "dstInterfaceId": 5003,
+      "srcInterfaceName": "Ge-0/0/10",
+      "dstInterfaceName": "Ge-0/0/11",
+      "srcInterfaceIpAddr": "10.0.237.157",
+      "dstInterfaceIpAddr": "10.0.238.158"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1005,
+      "srcInterfaceId": 5004,
+      "dstInterfaceId": 5005,
+      "srcInterfaceName": "Ge-0/0/12",
+      "dstInterfaceName": "Ge-0/0/13",
+      "srcInterfaceIpAddr": "10.0.239.159",
+      "dstInterfaceIpAddr": "10.0.240.160"
+    },
+    {
+      "srcDeviceId": 1005,
+      "dstDeviceId": 1006,
+      "srcInterfaceId": 5006,
+      "dstInterfaceId": 5007,
+      "srcInterfaceName": "Ge-0/0/14",
+      "dstInterfaceName": "Ge-0/0/15",
+      "srcInterfaceIpAddr": "10.0.240.161",
+      "dstInterfaceIpAddr": "10.0.241.162"
+    },
+    {
+      "srcDeviceId": 1007,
+      "dstDeviceId": 1008,
+      "srcInterfaceId": 5008,
+      "dstInterfaceId": 5009,
+      "srcInterfaceName": "Ge-0/0/16",
+      "dstInterfaceName": "Ge-0/0/17",
+      "srcInterfaceIpAddr": "10.0.242.163",
+      "dstInterfaceIpAddr": "10.0.243.164"
+    },
+    {
+      "srcDeviceId": 1009,
+      "dstDeviceId": 1010,
+      "srcInterfaceId": 5010,
+      "dstInterfaceId": 5011,
+      "srcInterfaceName": "Ge-0/0/18",
+      "dstInterfaceName": "Ge-0/0/19",
+      "srcInterfaceIpAddr": "10.0.244.165",
+      "dstInterfaceIpAddr": "10.0.245.166"
+    },
+    {
+      "srcDeviceId": 1010,
+      "dstDeviceId": 1011,
+      "srcInterfaceId": 5012,
+      "dstInterfaceId": 5013,
+      "srcInterfaceName": "Ge-0/0/20",
+      "dstInterfaceName": "Ge-0/0/21",
+      "srcInterfaceIpAddr": "10.0.245.167",
+      "dstInterfaceIpAddr": "10.0.246.168"
+    },
+    {
+      "srcDeviceId": 1012,
+      "dstDeviceId": 1013,
+      "srcInterfaceId": 5014,
+      "dstInterfaceId": 5015,
+      "srcInterfaceName": "Ge-0/0/22",
+      "dstInterfaceName": "Ge-0/0/23",
+      "srcInterfaceIpAddr": "10.0.247.169",
+      "dstInterfaceIpAddr": "10.0.248.170"
+    },
+    {
+      "srcDeviceId": 1013,
+      "dstDeviceId": 1014,
+      "srcInterfaceId": 5016,
+      "dstInterfaceId": 5017,
+      "srcInterfaceName": "Ge-0/0/0",
+      "dstInterfaceName": "Ge-0/0/1",
+      "srcInterfaceIpAddr": "10.0.248.171",
+      "dstInterfaceIpAddr": "10.0.249.172"
+    },
+    {
+      "srcDeviceId": 1014,
+      "dstDeviceId": 1015,
+      "srcInterfaceId": 5018,
+      "dstInterfaceId": 5019,
+      "srcInterfaceName": "Ge-0/0/2",
+      "dstInterfaceName": "Ge-0/0/3",
+      "srcInterfaceIpAddr": "10.0.249.173",
+      "dstInterfaceIpAddr": "10.0.250.174"
+    },
+    {
+      "srcDeviceId": 1016,
+      "dstDeviceId": 1017,
+      "srcInterfaceId": 5020,
+      "dstInterfaceId": 5021,
+      "srcInterfaceName": "Ge-0/0/4",
+      "dstInterfaceName": "Ge-0/0/5",
+      "srcInterfaceIpAddr": "10.0.251.175",
+      "dstInterfaceIpAddr": "10.0.252.176"
+    },
+    {
+      "srcDeviceId": 1017,
+      "dstDeviceId": 1018,
+      "srcInterfaceId": 5022,
+      "dstInterfaceId": 5023,
+      "srcInterfaceName": "Ge-0/0/6",
+      "dstInterfaceName": "Ge-0/0/7",
+      "srcInterfaceIpAddr": "10.0.252.177",
+      "dstInterfaceIpAddr": "10.0.253.178"
+    },
+    {
+      "srcDeviceId": 1018,
+      "dstDeviceId": 1019,
+      "srcInterfaceId": 5024,
+      "dstInterfaceId": 5025,
+      "srcInterfaceName": "Ge-0/0/8",
+      "dstInterfaceName": "Ge-0/0/9",
+      "srcInterfaceIpAddr": "10.0.253.179",
+      "dstInterfaceIpAddr": "10.0.254.180"
+    },
+    {
+      "srcDeviceId": 1020,
+      "dstDeviceId": 1021,
+      "srcInterfaceId": 5026,
+      "dstInterfaceId": 5027,
+      "srcInterfaceName": "Ge-0/0/10",
+      "dstInterfaceName": "Ge-0/0/11",
+      "srcInterfaceIpAddr": "10.0.0.181",
+      "dstInterfaceIpAddr": "10.0.1.182"
+    },
+    {
+      "srcDeviceId": 1022,
+      "dstDeviceId": 1023,
+      "srcInterfaceId": 5028,
+      "dstInterfaceId": 5029,
+      "srcInterfaceName": "Ge-0/0/12",
+      "dstInterfaceName": "Ge-0/0/13",
+      "srcInterfaceIpAddr": "10.0.2.183",
+      "dstInterfaceIpAddr": "10.0.3.184"
+    },
+    {
+      "srcDeviceId": 1024,
+      "dstDeviceId": 1025,
+      "srcInterfaceId": 5030,
+      "dstInterfaceId": 5031,
+      "srcInterfaceName": "Ge-0/0/14",
+      "dstInterfaceName": "Ge-0/0/15",
+      "srcInterfaceIpAddr": "10.0.4.185",
+      "dstInterfaceIpAddr": "10.0.5.186"
+    },
+    {
+      "srcDeviceId": 1026,
+      "dstDeviceId": 1027,
+      "srcInterfaceId": 5032,
+      "dstInterfaceId": 5033,
+      "srcInterfaceName": "Ge-0/0/16",
+      "dstInterfaceName": "Ge-0/0/17",
+      "srcInterfaceIpAddr": "10.0.6.187",
+      "dstInterfaceIpAddr": "10.0.7.188"
+    },
+    {
+      "srcDeviceId": 1027,
+      "dstDeviceId": 1028,
+      "srcInterfaceId": 5034,
+      "dstInterfaceId": 5035,
+      "srcInterfaceName": "Ge-0/0/18",
+      "dstInterfaceName": "Ge-0/0/19",
+      "srcInterfaceIpAddr": "10.0.7.189",
+      "dstInterfaceIpAddr": "10.0.8.190"
+    },
+    {
+      "srcDeviceId": 1028,
+      "dstDeviceId": 1029,
+      "srcInterfaceId": 5036,
+      "dstInterfaceId": 5037,
+      "srcInterfaceName": "Ge-0/0/20",
+      "dstInterfaceName": "Ge-0/0/21",
+      "srcInterfaceIpAddr": "10.0.8.191",
+      "dstInterfaceIpAddr": "10.0.9.192"
+    },
+    {
+      "srcDeviceId": 1030,
+      "dstDeviceId": 1031,
+      "srcInterfaceId": 5038,
+      "dstInterfaceId": 5039,
+      "srcInterfaceName": "Ge-0/0/22",
+      "dstInterfaceName": "Ge-0/0/23",
+      "srcInterfaceIpAddr": "10.0.10.193",
+      "dstInterfaceIpAddr": "10.0.11.194"
+    },
+    {
+      "srcDeviceId": 1031,
+      "dstDeviceId": 1032,
+      "srcInterfaceId": 5040,
+      "dstInterfaceId": 5041,
+      "srcInterfaceName": "Ge-0/0/0",
+      "dstInterfaceName": "Ge-0/0/1",
+      "srcInterfaceIpAddr": "10.0.11.195",
+      "dstInterfaceIpAddr": "10.0.12.196"
+    },
+    {
+      "srcDeviceId": 1033,
+      "dstDeviceId": 1034,
+      "srcInterfaceId": 5042,
+      "dstInterfaceId": 5043,
+      "srcInterfaceName": "Ge-0/0/2",
+      "dstInterfaceName": "Ge-0/0/3",
+      "srcInterfaceIpAddr": "10.0.13.197",
+      "dstInterfaceIpAddr": "10.0.14.198"
+    },
+    {
+      "srcDeviceId": 1034,
+      "dstDeviceId": 1035,
+      "srcInterfaceId": 5044,
+      "dstInterfaceId": 5045,
+      "srcInterfaceName": "Ge-0/0/4",
+      "dstInterfaceName": "Ge-0/0/5",
+      "srcInterfaceIpAddr": "10.0.14.199",
+      "dstInterfaceIpAddr": "10.0.15.200"
+    },
+    {
+      "srcDeviceId": 1035,
+      "dstDeviceId": 1036,
+      "srcInterfaceId": 5046,
+      "dstInterfaceId": 5047,
+      "srcInterfaceName": "Ge-0/0/6",
+      "dstInterfaceName": "Ge-0/0/7",
+      "srcInterfaceIpAddr": "10.0.15.201",
+      "dstInterfaceIpAddr": "10.0.16.202"
+    },
+    {
+      "srcDeviceId": 1037,
+      "dstDeviceId": 1038,
+      "srcInterfaceId": 5048,
+      "dstInterfaceId": 5049,
+      "srcInterfaceName": "Ge-0/0/8",
+      "dstInterfaceName": "Ge-0/0/9",
+      "srcInterfaceIpAddr": "10.0.17.203",
+      "dstInterfaceIpAddr": "10.0.18.204"
+    },
+    {
+      "srcDeviceId": 1039,
+      "dstDeviceId": 1040,
+      "srcInterfaceId": 5050,
+      "dstInterfaceId": 5051,
+      "srcInterfaceName": "Ge-0/0/10",
+      "dstInterfaceName": "Ge-0/0/11",
+      "srcInterfaceIpAddr": "10.0.19.205",
+      "dstInterfaceIpAddr": "10.0.20.206"
+    },
+    {
+      "srcDeviceId": 1003,
+      "dstDeviceId": 1022,
+      "srcInterfaceId": 5052,
+      "dstInterfaceId": 5053,
+      "srcInterfaceName": "Ge-0/0/12",
+      "dstInterfaceName": "Ge-0/0/13",
+      "srcInterfaceIpAddr": "10.0.238.207",
+      "dstInterfaceIpAddr": "10.0.2.208"
+    },
+    {
+      "srcDeviceId": 1001,
+      "dstDeviceId": 1006,
+      "srcInterfaceId": 5054,
+      "dstInterfaceId": 5055,
+      "srcInterfaceName": "Ge-0/0/14",
+      "dstInterfaceName": "Ge-0/0/15",
+      "srcInterfaceIpAddr": "10.0.236.209",
+      "dstInterfaceIpAddr": "10.0.241.210"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1031,
+      "srcInterfaceId": 5056,
+      "dstInterfaceId": 5057,
+      "srcInterfaceName": "Ge-0/0/16",
+      "dstInterfaceName": "Ge-0/0/17",
+      "srcInterfaceIpAddr": "10.0.239.211",
+      "dstInterfaceIpAddr": "10.0.11.212"
+    },
+    {
+      "srcDeviceId": 1006,
+      "dstDeviceId": 1039,
+      "srcInterfaceId": 5058,
+      "dstInterfaceId": 5059,
+      "srcInterfaceName": "Ge-0/0/18",
+      "dstInterfaceName": "Ge-0/0/19",
+      "srcInterfaceIpAddr": "10.0.241.213",
+      "dstInterfaceIpAddr": "10.0.19.214"
+    },
+    {
+      "srcDeviceId": 1040,
+      "dstDeviceId": 1021,
+      "srcInterfaceId": 5060,
+      "dstInterfaceId": 5061,
+      "srcInterfaceName": "Ge-0/0/20",
+      "dstInterfaceName": "Ge-0/0/21",
+      "srcInterfaceIpAddr": "10.0.20.215",
+      "dstInterfaceIpAddr": "10.0.1.216"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1024,
+      "srcInterfaceId": 5062,
+      "dstInterfaceId": 5063,
+      "srcInterfaceName": "Ge-0/0/22",
+      "dstInterfaceName": "Ge-0/0/23",
+      "srcInterfaceIpAddr": "10.0.239.217",
+      "dstInterfaceIpAddr": "10.0.4.218"
+    },
+    {
+      "srcDeviceId": 1001,
+      "dstDeviceId": 1014,
+      "srcInterfaceId": 5064,
+      "dstInterfaceId": 5065,
+      "srcInterfaceName": "Ge-0/0/0",
+      "dstInterfaceName": "Ge-0/0/1",
+      "srcInterfaceIpAddr": "10.0.236.219",
+      "dstInterfaceIpAddr": "10.0.249.220"
+    },
+    {
+      "srcDeviceId": 1023,
+      "dstDeviceId": 1008,
+      "srcInterfaceId": 5066,
+      "dstInterfaceId": 5067,
+      "srcInterfaceName": "Ge-0/0/2",
+      "dstInterfaceName": "Ge-0/0/3",
+      "srcInterfaceIpAddr": "10.0.3.221",
+      "dstInterfaceIpAddr": "10.0.243.222"
+    },
+    {
+      "srcDeviceId": 1005,
+      "dstDeviceId": 1034,
+      "srcInterfaceId": 5068,
+      "dstInterfaceId": 5069,
+      "srcInterfaceName": "Ge-0/0/4",
+      "dstInterfaceName": "Ge-0/0/5",
+      "srcInterfaceIpAddr": "10.0.240.223",
+      "dstInterfaceIpAddr": "10.0.14.224"
+    },
+    {
+      "srcDeviceId": 1005,
+      "dstDeviceId": 1017,
+      "srcInterfaceId": 5070,
+      "dstInterfaceId": 5071,
+      "srcInterfaceName": "Ge-0/0/6",
+      "dstInterfaceName": "Ge-0/0/7",
+      "srcInterfaceIpAddr": "10.0.240.225",
+      "dstInterfaceIpAddr": "10.0.252.226"
+    },
+    {
+      "srcDeviceId": 1014,
+      "dstDeviceId": 1028,
+      "srcInterfaceId": 5072,
+      "dstInterfaceId": 5073,
+      "srcInterfaceName": "Ge-0/0/8",
+      "dstInterfaceName": "Ge-0/0/9",
+      "srcInterfaceIpAddr": "10.0.249.227",
+      "dstInterfaceIpAddr": "10.0.8.228"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1037,
+      "srcInterfaceId": 5074,
+      "dstInterfaceId": 5075,
+      "srcInterfaceName": "Ge-0/0/10",
+      "dstInterfaceName": "Ge-0/0/11",
+      "srcInterfaceIpAddr": "10.0.239.229",
+      "dstInterfaceIpAddr": "10.0.17.230"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1011,
+      "srcInterfaceId": 5076,
+      "dstInterfaceId": 5077,
+      "srcInterfaceName": "Ge-0/0/12",
+      "dstInterfaceName": "Ge-0/0/13",
+      "srcInterfaceIpAddr": "10.0.239.231",
+      "dstInterfaceIpAddr": "10.0.246.232"
+    },
+    {
+      "srcDeviceId": 1040,
+      "dstDeviceId": 1019,
+      "srcInterfaceId": 5078,
+      "dstInterfaceId": 5079,
+      "srcInterfaceName": "Ge-0/0/14",
+      "dstInterfaceName": "Ge-0/0/15",
+      "srcInterfaceIpAddr": "10.0.20.233",
+      "dstInterfaceIpAddr": "10.0.254.234"
+    },
+    {
+      "srcDeviceId": 1020,
+      "dstDeviceId": 1035,
+      "srcInterfaceId": 5080,
+      "dstInterfaceId": 5081,
+      "srcInterfaceName": "Ge-0/0/16",
+      "dstInterfaceName": "Ge-0/0/17",
+      "srcInterfaceIpAddr": "10.0.0.235",
+      "dstInterfaceIpAddr": "10.0.15.236"
+    },
+    {
+      "srcDeviceId": 1033,
+      "dstDeviceId": 1014,
+      "srcInterfaceId": 5082,
+      "dstInterfaceId": 5083,
+      "srcInterfaceName": "Ge-0/0/18",
+      "dstInterfaceName": "Ge-0/0/19",
+      "srcInterfaceIpAddr": "10.0.13.237",
+      "dstInterfaceIpAddr": "10.0.249.238"
+    },
+    {
+      "srcDeviceId": 1024,
+      "dstDeviceId": 1040,
+      "srcInterfaceId": 5084,
+      "dstInterfaceId": 5085,
+      "srcInterfaceName": "Ge-0/0/20",
+      "dstInterfaceName": "Ge-0/0/21",
+      "srcInterfaceIpAddr": "10.0.4.239",
+      "dstInterfaceIpAddr": "10.0.20.240"
+    },
+    {
+      "srcDeviceId": 1028,
+      "dstDeviceId": 1008,
+      "srcInterfaceId": 5086,
+      "dstInterfaceId": 5087,
+      "srcInterfaceName": "Ge-0/0/22",
+      "dstInterfaceName": "Ge-0/0/23",
+      "srcInterfaceIpAddr": "10.0.8.241",
+      "dstInterfaceIpAddr": "10.0.243.242"
+    },
+    {
+      "srcDeviceId": 1004,
+      "dstDeviceId": 1022,
+      "srcInterfaceId": 5088,
+      "dstInterfaceId": 5089,
+      "srcInterfaceName": "Ge-0/0/0",
+      "dstInterfaceName": "Ge-0/0/1",
+      "srcInterfaceIpAddr": "10.0.239.243",
+      "dstInterfaceIpAddr": "10.0.2.244"
+    },
+    {
+      "srcDeviceId": 1007,
+      "dstDeviceId": 1040,
+      "srcInterfaceId": 5090,
+      "dstInterfaceId": 5091,
+      "srcInterfaceName": "Ge-0/0/2",
+      "dstInterfaceName": "Ge-0/0/3",
+      "srcInterfaceIpAddr": "10.0.242.245",
+      "dstInterfaceIpAddr": "10.0.20.246"
+    },
+    {
+      "srcDeviceId": 1008,
+      "dstDeviceId": 1033,
+      "srcInterfaceId": 5092,
+      "dstInterfaceId": 5093,
+      "srcInterfaceName": "Ge-0/0/4",
+      "dstInterfaceName": "Ge-0/0/5",
+      "srcInterfaceIpAddr": "10.0.243.247",
+      "dstInterfaceIpAddr": "10.0.13.248"
+    },
+    {
+      "srcDeviceId": 1009,
+      "dstDeviceId": 1003,
+      "srcInterfaceId": 5094,
+      "dstInterfaceId": 5095,
+      "srcInterfaceName": "Ge-0/0/6",
+      "dstInterfaceName": "Ge-0/0/7",
+      "srcInterfaceIpAddr": "10.0.244.249",
+      "dstInterfaceIpAddr": "10.0.238.250"
+    },
+    {
+      "srcDeviceId": 1017,
+      "dstDeviceId": 1011,
+      "srcInterfaceId": 5096,
+      "dstInterfaceId": 5097,
+      "srcInterfaceName": "Ge-0/0/8",
+      "dstInterfaceName": "Ge-0/0/9",
+      "srcInterfaceIpAddr": "10.0.252.251",
+      "dstInterfaceIpAddr": "10.0.246.252"
+    },
+    {
+      "srcDeviceId": 1036,
+      "dstDeviceId": 1016,
+      "srcInterfaceId": 5098,
+      "dstInterfaceId": 5099,
+      "srcInterfaceName": "Ge-0/0/10",
+      "dstInterfaceName": "Ge-0/0/11",
+      "srcInterfaceIpAddr": "10.0.16.253",
+      "dstInterfaceIpAddr": "10.0.251.254"
+    },
+    {
+      "srcDeviceId": 1032,
+      "dstDeviceId": 1001,
+      "srcInterfaceId": 5100,
+      "dstInterfaceId": 5101,
+      "srcInterfaceName": "Ge-0/0/12",
+      "dstInterfaceName": "Ge-0/0/13",
+      "srcInterfaceIpAddr": "10.0.12.0",
+      "dstInterfaceIpAddr": "10.0.236.1"
+    }
+  ]
+}

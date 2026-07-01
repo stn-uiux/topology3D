@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+.graph-container canvas {
+  cursor: inherit !important;
+}
+
+.graph-tooltip {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  color: inherit !important;
+  pointer-events: none;
+}
+
+.float-tooltip-kap {
+  background: transparent !important;
+}
+
+/* Custom Global Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 17, 21, 0.5);
+  /* Matching dark app background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22d3ee;
+  /* cyan-400 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+  /* cyan-500 */
+}
+
+
+
+
+/* Disable default force-graph tooltip to use our custom React overlay */
+@keyframes pulse-blur-top {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.1;
+  }
+}
+
+@keyframes pulse-blur-bottom {
+
+  0%,
+  100% {
+    transform: translate(-50%, 50%) scale(3);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translate(-50%, 50%) scale(1.5);
+    opacity: 0.1;
+  }
+}
+
+@keyframes pulse-alarm-bg {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-blur-top {
+  animation: pulse-blur-top 2s ease-in-out infinite;
+}
+
+.animate-pulse-blur-bottom {
+  animation: pulse-blur-bottom 2s ease-in-out infinite;
+}
+
+.animate-pulse-alarm-bg {
+  animation: pulse-alarm-bg 2s ease-in-out infinite;
+}
+
+.react-flow__handle {
+  border: none !important;
+}
+
+/* 가상의 호버 영역 확장 (실제 크기는 유지하되 마우스 인식 영역만 2.5배 확대) */
+.react-flow__handle::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.react-flow__edge.reverse-animation path.react-flow__edge-path {
+  animation-direction: reverse !important;
+}
+
+.scene-tooltip {
+  display: none !important;
+}
+
+/* 2D 비활성화된 링크 마우스 커서 디폴트 처리 */
+.deactivated-edge,
+.deactivated-edge path,
+.deactivated-edge .react-flow__edge-interaction {
+  cursor: default !important;
+}
+/* 이벤트가 아예 무시되어 배경의 grab 커서가 나오는 것을 막기 위해 명시적으로 이벤트를 살려 default 커서가 뜨게 함 */
+.deactivated-edge .react-flow__edge-interaction {
+  pointer-events: auto !important;
+}
+
+
+.bg-space-gradient {
+  background: 
+    radial-gradient(circle at 15% 0%, rgba(45, 212, 191, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 100% 100%, rgba(88, 28, 135, 0.4) 0%, transparent 40%),
+    radial-gradient(ellipse at center, #172554 0%, #0f172a 40%, #000000 100%);
+}
+
+
+
+@keyframes twinkle-1 {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes twinkle-2 {
+  0% { opacity: 0; }
+  30% { opacity: 0; }
+  50% { opacity: 0.8; }
+  70% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes twinkle-3 {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.5; }
+}
