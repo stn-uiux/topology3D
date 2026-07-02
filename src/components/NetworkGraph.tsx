@@ -2088,7 +2088,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           setActiveDeviceId(node.parentDeviceId || null);
           setActiveGroupId(node.deviceGroupId || null);
         } else {
-                    setActiveDeviceId(null);
+          setActiveDeviceId(null);
           setActiveGroupId(null);
           nodeCoordsRef.current = {}; // Clear coordinate cache to restore initial pristine layout!
         }
@@ -2309,7 +2309,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
   const handleBackToGroup = useCallback(() => {
     if (activeGroupId === null) return;
-    
+
     const groupNode = visibleData.nodes.find(n => n.id === `group-${activeGroupId}`);
     if (groupNode) {
       setSelectedNode(groupNode);
@@ -2318,7 +2318,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       setSelectedNode(null);
       onNodeClick(null);
     }
-    
+
     setClickedNode(null);
     setTooltipPos(null);
     setActiveDeviceId(null);
@@ -4273,7 +4273,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
   useEffect(() => {
     if (externalSelectedNode !== undefined && externalSelectedNode !== selectedNode) {
-            if (externalSelectedNode === null) {
+      if (externalSelectedNode === null) {
         setSelectedNode(null);
         setClickedNode(null);
         setTooltipPos(null);
@@ -4687,24 +4687,26 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
           {/* Node Search Field Widget */}
           <div className="relative pointer-events-auto w-[320px] h-[32px]">
-            <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md shadow-2xl flex items-center px-2 h-full">
-              <select
-                value={searchFilter}
-                onChange={e => {
-                  setSearchFilter(e.target.value as any);
-                  if (stateRef.current.searchTerm.trim().length > 0) setShowSearchSuggestions(true);
-                }}
-                className="bg-transparent border-none outline-none text-gray-400 text-[11px] font-bold cursor-pointer pr-1 h-full flex items-center focus:outline-none appearance-none"
-                style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
-              >
-                <option value="all" className="bg-[#161920] text-gray-300">전체</option>
-                <option value="group" className="bg-[#161920] text-gray-300">그룹</option>
-                <option value="device" className="bg-[#161920] text-gray-300">장비</option>
-                <option value="interface" className="bg-[#161920] text-gray-300">포트</option>
-              </select>
-              <svg className="w-3 h-3 text-gray-500 ml-0.5 shrink-0 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-              <div className="w-[1px] h-4 bg-[#2d3748] mx-2"></div>
-              <svg className="w-3.5 h-3.5 text-gray-400 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md shadow-2xl flex items-center h-full">
+              <div className="relative flex items-center h-full group">
+                <select
+                  value={searchFilter}
+                  onChange={e => {
+                    setSearchFilter(e.target.value as any);
+                    if (stateRef.current.searchTerm.trim().length > 0) setShowSearchSuggestions(true);
+                  }}
+                  className="bg-transparent border-none outline-none text-gray-400 group-hover:text-gray-300 text-[11px] font-bold cursor-pointer h-full flex items-center focus:outline-none appearance-none pl-2 pr-6 w-[60px] z-10"
+                  style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
+                >
+                  <option value="all" className="bg-[#161920] text-gray-300">전체</option>
+                  <option value="group" className="bg-[#161920] text-gray-300">그룹</option>
+                  <option value="device" className="bg-[#161920] text-gray-300">장비</option>
+                  <option value="interface" className="bg-[#161920] text-gray-300">포트</option>
+                </select>
+                <svg className="absolute right-1.5 w-3 h-3 text-gray-500 group-hover:text-gray-400 pointer-events-none z-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+              <div className="w-[1px] h-4 bg-[#2d3748]"></div>
+              <svg className="w-3.5 h-3.5 text-gray-400 mx-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               <input
                 type="text"
                 placeholder="노드명 검색..."
@@ -4800,13 +4802,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
             <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md flex items-center shadow-2xl pointer-events-auto h-[32px]">
               <button
                 onClick={() => setIconConcept('planet')}
-                className={`px-3 h-full flex items-center justify-center text-[11px] font-bold rounded-l-md transition-colors ${iconConcept === 'planet' ? 'bg-cyan-600 text-white' : 'text-gray-400 hover:bg-[#2d3748]'}`}
+                className={`px-3 h-full flex items-center justify-center text-[11px] font-bold rounded-l-md transition-colors cursor-pointer ${iconConcept === 'planet' ? 'bg-cyan-600 text-white' : 'text-gray-400 hover:bg-[#2d3748]'}`}
               >
                 행성 테마
               </button>
               <button
                 onClick={() => setIconConcept('block')}
-                className={`px-3 h-full flex items-center justify-center text-[11px] font-bold rounded-r-md transition-colors ${iconConcept === 'block' ? 'bg-cyan-600 text-white' : 'text-gray-400 hover:bg-[#2d3748]'}`}
+                className={`px-3 h-full flex items-center justify-center text-[11px] font-bold rounded-r-md transition-colors cursor-pointer ${iconConcept === 'block' ? 'bg-cyan-600 text-white' : 'text-gray-400 hover:bg-[#2d3748]'}`}
               >
                 블록 테마
               </button>
@@ -4817,7 +4819,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           {!is2DMode && (
             <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md flex items-center shadow-2xl pointer-events-auto h-[32px]">
               <button
-                className="px-3.5 h-full hover:bg-[#2d3748] rounded-l-md text-gray-400 text-[11px] font-bold transition-colors flex items-center justify-center"
+                className="px-3.5 h-full hover:bg-[#2d3748] rounded-l-md text-gray-400 text-[11px] font-bold transition-colors flex items-center justify-center cursor-pointer"
                 onClick={() => {
                   if (graphRef.current) {
                     customZoomToFitAllNodes(500);
@@ -4832,7 +4834,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
               </button>
               <div className="w-[1px] h-4 bg-[#2d3748]"></div>
               <button
-                className={`px-3 h-full rounded-r-md transition-colors flex items-center justify-center ${isAutoRotating ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30' : 'text-gray-400 hover:bg-[#2d3748]'}`}
+                className={`px-3 h-full rounded-r-md transition-colors flex items-center justify-center cursor-pointer ${isAutoRotating ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30' : 'text-gray-400 hover:bg-[#2d3748]'}`}
                 onClick={() => setIsAutoRotating(!isAutoRotating)}
                 title={isAutoRotating ? "Pause Rotation" : "Auto Rotate"}
               >
@@ -4920,7 +4922,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
             <button
               onClick={() => setShowAlarmList(!showAlarmList)}
-              className={`px-2 py-1 rounded transition-colors flex items-center text-[11px] font-bold ${showAlarmList ? 'bg-cyan-600/20 text-cyan-400' : 'bg-[#2d3748]/50 text-gray-400 hover:text-gray-300 hover:bg-[#2d3748]/80'}`}
+              className={`px-2 py-1 rounded transition-colors flex items-center text-[11px] font-bold cursor-pointer ${showAlarmList ? 'bg-cyan-600/20 text-cyan-400' : 'bg-[#2d3748]/50 text-gray-400 hover:text-gray-300 hover:bg-[#2d3748]/80'}`}
             >
               리스트 {showAlarmList ? '접기' : '보기'}
               <svg className={`w-3 h-3 ml-1 transform transition-transform ${showAlarmList ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4955,8 +4957,8 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
                       <tr key={idx} className="hover:bg-[#2d3748]/40 transition-colors group cursor-pointer">
                         <td className="px-2 py-2 text-center">
                           <span className={`inline-flex items-center justify-center w-2 h-2 rounded-full ${alarm.severity === 'critical' ? 'bg-[#ef4444] animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]' :
-                              alarm.severity === 'major' ? 'bg-[#f97316]' :
-                                alarm.severity === 'minor' ? 'bg-[#eab308]' : 'bg-[#06b6d4]'
+                            alarm.severity === 'major' ? 'bg-[#f97316]' :
+                              alarm.severity === 'minor' ? 'bg-[#eab308]' : 'bg-[#06b6d4]'
                             }`} title={alarm.severity.toUpperCase()}></span>
                         </td>
                         <td className="px-2 py-2 text-[11px] font-mono text-gray-400">{alarm.type}</td>

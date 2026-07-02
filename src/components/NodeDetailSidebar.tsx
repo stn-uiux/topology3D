@@ -197,7 +197,7 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
             </div>
           )}
         </div>
-        <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-white bg-[#2d3748]/50 hover:bg-[#2d3748] rounded transition-colors">
+        <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-white bg-[#2d3748]/50 hover:bg-[#2d3748] rounded transition-colors cursor-pointer">
           <X className="w-4 h-4" />
         </button>
       </div>
@@ -258,29 +258,31 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
 
                 return (
                   <div key={dev.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
-                    <div className={`flex items-center justify-between p-2 transition-colors ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}>
-                      <div 
-                        className="flex items-center cursor-pointer hover:bg-[#1a202c] p-1 -m-1 rounded transition-colors flex-1"
-                        onClick={() => onNodeClick && onNodeClick(dev)}
-                        title="해당 장비로 이동"
-                      >
-                        <Server className="w-3.5 h-3.5 text-blue-400 mr-2" />
-                        <div>
+                    <div 
+                      className={`flex items-center justify-between p-2 transition-colors ${devLinks.length > 0 ? 'cursor-pointer hover:bg-[#1a202c]' : ''} ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}
+                      onClick={(e) => devLinks.length > 0 && toggleExpand(dev.id, e)}
+                    >
+                      <div className="flex items-center flex-1">
+                        <Server className="w-3.5 h-3.5 text-blue-400 mr-2 shrink-0" />
+                        <div 
+                          className="flex flex-col items-start cursor-pointer group"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onNodeClick && onNodeClick(dev);
+                          }}
+                          title="해당 장비로 이동"
+                        >
                           <div className="flex items-center">
-                            <p className="text-xs font-bold text-white hover:text-blue-300 transition-colors">{dev.label.split('\n')[1] || dev.label.split('\n')[0]}</p>
+                            <p className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">{dev.label.split('\n')[1] || dev.label.split('\n')[0]}</p>
                             <SeverityBadge severity={getActualSeverity(dev)} />
                           </div>
-                          {dev.ipAddr && <p className="text-[10px] text-gray-500 font-mono">{dev.ipAddr}</p>}
+                          {dev.ipAddr && <p className="text-[10px] text-gray-500 font-mono mt-0.5 group-hover:text-blue-300/70 transition-colors">{dev.ipAddr}</p>}
                         </div>
                       </div>
                       {devLinks.length > 0 && (
-                        <button 
-                          onClick={(e) => toggleExpand(dev.id, e)}
-                          className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer ml-2"
-                          title={isExpanded ? "링크 정보 접기" : "링크 정보 펼치기"}
-                        >
+                        <div className="p-1.5 text-white/70 shrink-0 ml-2">
                           {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2.5]" /> : <ChevronDown className="w-5 h-5 stroke-[2.5]" />}
-                        </button>
+                        </div>
                       )}
                     </div>
                     
@@ -349,29 +351,31 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
 
                 return (
                   <div key={inf.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
-                    <div className={`p-2 flex items-center justify-between transition-colors ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}>
-                      <div 
-                        className="flex items-center cursor-pointer hover:bg-[#1a202c] p-1 -m-1 rounded transition-colors flex-1"
-                        onClick={() => onNodeClick && onNodeClick(inf)}
-                        title="해당 포트로 이동"
-                      >
-                        <Network className="w-3.5 h-3.5 text-green-400 mr-2" />
-                        <div>
+                    <div 
+                      className={`flex items-center justify-between p-2 transition-colors ${infLinkObj ? 'cursor-pointer hover:bg-[#1a202c]' : ''} ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}
+                      onClick={(e) => infLinkObj && toggleExpand(inf.id, e)}
+                    >
+                      <div className="flex items-center flex-1">
+                        <Network className="w-3.5 h-3.5 text-green-400 mr-2 shrink-0" />
+                        <div 
+                          className="flex flex-col items-start cursor-pointer group"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onNodeClick && onNodeClick(inf);
+                          }}
+                          title="해당 포트로 이동"
+                        >
                           <div className="flex items-center">
-                            <p className="text-xs font-bold text-white hover:text-blue-300 transition-colors">{inf.interfaceName || inf.label}</p>
+                            <p className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">{inf.interfaceName || inf.label}</p>
                             <SeverityBadge severity={getActualSeverity(inf)} />
                           </div>
-                          {inf.ipAddr && <p className="text-[10px] text-gray-500 font-mono">{inf.ipAddr}</p>}
+                          {inf.ipAddr && <p className="text-[10px] text-gray-500 font-mono mt-0.5 group-hover:text-blue-300/70 transition-colors">{inf.ipAddr}</p>}
                         </div>
                       </div>
                       {infLinkObj && (
-                        <button 
-                          onClick={(e) => toggleExpand(inf.id, e)}
-                          className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer shrink-0 ml-2"
-                          title={isExpanded ? "링크 정보 접기" : "링크 정보 펼치기"}
-                        >
+                        <div className="p-1.5 text-white/70 shrink-0 ml-2">
                           {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2.5]" /> : <ChevronDown className="w-5 h-5 stroke-[2.5]" />}
-                        </button>
+                        </div>
                       )}
                     </div>
 

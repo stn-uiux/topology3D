@@ -165,13 +165,13 @@ export default function App() {
             <div className="ml-8 bg-[#0a0b0e] p-1 rounded-md border border-[#2d3748] flex items-center">
               <button
                 onClick={() => setIs2DMode(false)}
-                className={`px-3 py-1.5 text-xs font-bold rounded ${!is2DMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
+                className={`px-3 py-1.5 text-xs font-bold rounded cursor-pointer ${!is2DMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
               >
                 3D Topology
               </button>
               <button
                 onClick={() => setIs2DMode(true)}
-                className={`px-3 py-1.5 text-xs font-bold rounded ${is2DMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
+                className={`px-3 py-1.5 text-xs font-bold rounded cursor-pointer ${is2DMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
               >
                 2D Architecture
               </button>
@@ -211,14 +211,14 @@ export default function App() {
             <div className="flex space-x-2 pointer-events-auto">
               <button
                 onClick={handleDownloadJson}
-                className="flex-1 bg-blue-600/80 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 px-2 rounded border border-blue-500/50 shadow-lg backdrop-blur-md transition-colors flex items-center justify-center"
+                className="flex-1 bg-blue-600/80 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 px-2 rounded border border-blue-500/50 shadow-lg backdrop-blur-md transition-colors flex items-center justify-center cursor-pointer"
               >
                 <Download className="w-3 h-3 mr-1" />
                 다운로드
               </button>
               <button
                 onClick={() => setShowLoadModal(true)}
-                className="flex-1 bg-gray-700/80 hover:bg-gray-600 text-white text-[11px] font-bold py-1.5 px-2 rounded border border-gray-600/50 shadow-lg backdrop-blur-md transition-colors flex items-center justify-center"
+                className="flex-1 bg-gray-700/80 hover:bg-gray-600 text-white text-[11px] font-bold py-1.5 px-2 rounded border border-gray-600/50 shadow-lg backdrop-blur-md transition-colors flex items-center justify-center cursor-pointer"
               >
                 <Upload className="w-3 h-3 mr-1" />
                 불러오기
@@ -302,7 +302,7 @@ export default function App() {
                 <FileJson className="w-4 h-4 mr-2 text-blue-400" />
                 데이터 불러오기
               </h2>
-              <button onClick={() => setShowLoadModal(false)} className="text-gray-400 hover:text-white transition-colors">
+              <button onClick={() => setShowLoadModal(false)} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -315,7 +315,7 @@ export default function App() {
                     <button
                       key={file}
                       onClick={() => handleLoadPublicJson(file)}
-                      className="w-full text-left px-3 py-2.5 bg-[#0a0b0e] border border-[#2d3748] hover:border-blue-500/50 hover:bg-blue-600/10 rounded transition-colors text-sm text-gray-300 flex items-center justify-between group"
+                      className="w-full text-left px-3 py-2.5 bg-[#0a0b0e] border border-[#2d3748] hover:border-blue-500/50 hover:bg-blue-600/10 rounded transition-colors text-sm text-gray-300 flex items-center justify-between group cursor-pointer"
                     >
                       <span className="font-mono">{file}</span>
                       <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-blue-400 transition-colors" />
