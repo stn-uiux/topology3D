@@ -5031,7 +5031,10 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
         {/* Alarm List Widget */}
         {showAlarmList && (
-          <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md flex flex-col shadow-2xl min-w-[480px] flex-1 min-h-0">
+          <div 
+            className="pointer-events-auto bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md flex flex-col shadow-2xl min-w-[480px] flex-1 min-h-0"
+            onWheel={(e) => e.stopPropagation()}
+          >
             <div className="px-4 py-2 border-b border-[#2d3748] flex justify-between items-center text-[11px] font-bold text-gray-500 uppercase tracking-widest shrink-0">
               <span>장애 리스트</span>
               <span className="text-gray-400 font-mono text-[11px]">총 {sortedAlarms.length}건</span>

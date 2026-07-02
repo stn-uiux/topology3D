@@ -390,7 +390,11 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
   return (
     <>
       {/* Main Panel - Bottom overlay */}
-      <div className="absolute bottom-4 left-1/2 z-10 pointer-events-auto" style={{ transform: `translate(calc(-50% + ${position.x}px), ${position.y}px)` }}>
+      <div 
+        className="absolute bottom-4 left-1/2 z-10 pointer-events-auto" 
+        style={{ transform: `translate(calc(-50% + ${position.x}px), ${position.y}px)` }}
+        onWheel={(e) => e.stopPropagation()}
+      >
         <div className="bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-lg shadow-2xl w-max min-w-[880px] max-w-[95vw]">
 
           {/* Search bar row */}
