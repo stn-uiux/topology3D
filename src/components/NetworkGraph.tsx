@@ -212,6 +212,8 @@ const getGridTexture = (lineColor: string, bgColor: string = 'transparent') => {
 interface NetworkGraphProps {
   data: GraphData;
   onNodeClick: (node: GraphNode | null) => void;
+  externalSelectedNode?: GraphNode | null;
+  externalHoverNode?: GraphNode | null;
   iconConcept?: 'planet' | 'block';
   onConceptChange?: (concept: 'planet' | 'block') => void;
   is2DMode?: boolean;
@@ -331,7 +333,7 @@ const customRaycast = function (this: any, raycaster: THREE.Raycaster, intersect
   }
 };
 
-export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, externalSelectedNode, iconConcept = 'planet', onConceptChange, is2DMode = false }) => {
+export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, externalSelectedNode, externalHoverNode, iconConcept = 'planet', onConceptChange, is2DMode = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const graphRef = useRef<any>();
   const lastClickTimeRef = useRef<number>(0);
@@ -4315,6 +4317,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       }
     }
   }, [externalSelectedNode, handleNodeClick, handleResetToRoot, selectedNode]);
+
+  // 외부(사이드바 등)에서 호버된 노드 상태 동기화
+  useEffect(() => {
+    if (externalHoverNode !== undefined) {
+      setHoverNode(externalHoverNode);
+    }
+  }, [externalHoverNode]);
 
   return (
     <div ref={containerRef} className="graph-container absolute top-16 left-0 right-0 bottom-0 bg-transparent overflow-hidden" style={{ cursor: 'default' }}>

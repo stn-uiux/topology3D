@@ -19,6 +19,7 @@ const getGroupName = (group: string) => {
 
 export default function App() {
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
+  const [hoverNode, setHoverNode] = useState<GraphNode | null>(null);
   const [graphData, setGraphData] = useState<GraphData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -200,7 +201,7 @@ export default function App() {
               <p className="text-red-400 text-sm">오류: {error}</p>
             </div>
           )}
-          {graphData && <NetworkGraph key={dataVersion} data={graphData} onNodeClick={setSelectedNode} externalSelectedNode={selectedNode} iconConcept={iconConcept} onConceptChange={setIconConcept} is2DMode={is2DMode} />}
+          {graphData && <NetworkGraph key={dataVersion} data={graphData} onNodeClick={setSelectedNode} externalSelectedNode={selectedNode} externalHoverNode={hoverNode} iconConcept={iconConcept} onConceptChange={setIconConcept} is2DMode={is2DMode} />}
 
 
 
@@ -290,6 +291,7 @@ export default function App() {
           graphData={graphData}
           onClose={() => setSelectedNode(null)}
           onNodeClick={setSelectedNode}
+          onNodeHover={setHoverNode}
         />
       )}
 

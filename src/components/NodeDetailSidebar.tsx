@@ -7,6 +7,7 @@ interface NodeDetailSidebarProps {
   node: GraphNode;
   onClose: () => void;
   onNodeClick?: (node: GraphNode) => void;
+  onNodeHover?: (node: GraphNode | null) => void;
   graphData: GraphData;
 }
 
@@ -50,7 +51,7 @@ const SeverityBadge = ({ severity }: { severity?: string }) => {
   );
 };
 
-export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onClose, onNodeClick, graphData }) => {
+export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onClose, onNodeClick, onNodeHover, graphData }) => {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   
   const toggleExpand = (id: string, e: React.MouseEvent) => {
@@ -102,10 +103,9 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
     return graphData.nodes.filter(n => n.deviceGroupId === node.deviceGroupId && n.isDeviceNode);
   }, [node, graphData]);
 
-  const ringName = useMemo(() => {
-    if (!node.isGroupNode || !node.deviceGroupId) return null;
-    const ring = RINGS.find(r => r.groups.includes(node.deviceGroupId!));
-    return ring ? ring.name : null;
+  const ringNames = useMemo(() => {
+    if (!node.isGroupNode || !node.deviceGroupId) return [];
+    return RINGS.filter(r => r.groups.includes(node.deviceGroupId!)).map(r => r.name);
   }, [node]);
 
   const subInterfaces = useMemo(() => {
@@ -226,10 +226,10 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                 <span className="text-xs font-mono text-gray-300">{subDevices.length}개</span>
               </div>
             )}
-            {node.isGroupNode && ringName && (
+            {node.isGroupNode && ringNames.length > 0 && (
               <div className="flex justify-between border-b border-gray-800 pb-1.5">
                 <span className="text-xs text-gray-500">소속 링</span>
-                <span className="text-xs font-bold text-purple-400">{ringName}</span>
+                <span className="text-xs font-bold text-purple-400">{ringNames.join(', ')}</span>
               </div>
             )}
             {node.isDeviceNode && (
@@ -257,7 +257,12 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                 const isExpanded = expandedIds.has(dev.id);
 
                 return (
-                  <div key={dev.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
+                  <div 
+                    key={dev.id} 
+                    className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden"
+                    onMouseEnter={() => onNodeHover && onNodeHover(dev)}
+                    onMouseLeave={() => onNodeHover && onNodeHover(null)}
+                  >
                     <div 
                       className={`flex items-center justify-between p-2 transition-colors ${devLinks.length > 0 ? 'cursor-pointer hover:bg-[#1a202c]' : ''} ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}
                       onClick={(e) => devLinks.length > 0 && toggleExpand(dev.id, e)}
@@ -350,7 +355,12 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                 const isExpanded = expandedIds.has(inf.id);
 
                 return (
-                  <div key={inf.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
+                  <div 
+                    key={inf.id} 
+                    className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden"
+                    onMouseEnter={() => onNodeHover && onNodeHover(inf)}
+                    onMouseLeave={() => onNodeHover && onNodeHover(null)}
+                  >
                     <div 
                       className={`flex items-center justify-between p-2 transition-colors ${infLinkObj ? 'cursor-pointer hover:bg-[#1a202c]' : ''} ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}
                       onClick={(e) => infLinkObj && toggleExpand(inf.id, e)}
