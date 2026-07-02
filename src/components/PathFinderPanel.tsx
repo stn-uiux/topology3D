@@ -278,37 +278,42 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
     }
 
     setSelectedPathIdx(idx);
-    const path = results[idx];
-    if (!path) return;
 
-    const deviceIds = new Set<string>(path.path.map(id => String(id)));
-    const linkPairs = new Set<string>();
-    const directedLinks = new Set<string>();
+    setTimeout(() => {
+      const path = results[idx];
+      if (!path) return;
 
-    for (let i = 0; i < path.path.length - 1; i++) {
-      const src = path.path[i];
-      const tgt = path.path[i + 1];
-      linkPairs.add(`${src}-${tgt}`);
-      linkPairs.add(`${tgt}-${src}`);
-      directedLinks.add(`${src}-${tgt}`);
-    }
+      const deviceIds = new Set<string>(path.path.map(id => String(id)));
+      const linkPairs = new Set<string>();
+      const directedLinks = new Set<string>();
 
-    // 경로의 장비들이 속한 그룹 ID 수집
-    const raw = getRawData();
-    const groupIds: number[] = [];
-    if (raw) {
-      for (const deviceId of path.path) {
-        const node = raw.nodes.find((n: any) => n.deviceId === deviceId);
-        if (node && !groupIds.includes(node.deviceGroupId)) {
-          groupIds.push(node.deviceGroupId);
+      for (let i = 0; i < path.path.length - 1; i++) {
+        const src = path.path[i];
+        const tgt = path.path[i + 1];
+        linkPairs.add(`${src}-${tgt}`);
+        linkPairs.add(`${tgt}-${src}`);
+        directedLinks.add(`${src}-${tgt}`);
+      }
+
+      // 경로의 장비들이 속한 그룹 ID 수집
+      const raw = getRawData();
+      const groupIds: number[] = [];
+      if (raw) {
+        for (const res of results) {
+          for (const deviceId of res.path) {
+            const node = raw.nodes.find((n: any) => n.deviceId === deviceId);
+            if (node && !groupIds.includes(node.deviceGroupId)) {
+              groupIds.push(node.deviceGroupId);
+            }
+          }
         }
       }
-    }
 
-    const srcNodeId = String(path.path[0]);
-    const dstNodeId = String(path.path[path.path.length - 1]);
+      const srcNodeId = String(path.path[0]);
+      const dstNodeId = String(path.path[path.path.length - 1]);
 
-    onPathSelect({ deviceIds, linkPairs, directedLinks, srcNodeId, dstNodeId, resultCount: typeof paths !== 'undefined' ? paths.length : results.length }, groupIds);
+      onPathSelect({ deviceIds, linkPairs, directedLinks, srcNodeId, dstNodeId, resultCount: results.length }, groupIds);
+    }, 50);
   }, [selectedPathIdx, results, onPathSelect]);
 
   const handleDeviceSelect = useCallback((device: DeviceInfo) => {

@@ -59,16 +59,17 @@ export const getLinkStrength = (link: any) => {
 // 3. 커스텀 척력: 라인이 노드를 관통하지 못하도록 노드를 밀어내는 물리 힘 (곡선 지양)
 export const createLinkCollideForce = (links: any[]) => {
   let nodes: any[] = [];
+  let resolvedLinks: any[] = [];
 
   function force(alpha: number) {
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
       if (node.x === undefined || node.y === undefined || node.z === undefined) continue;
 
-      for (let j = 0; j < links.length; j++) {
-        const link = links[j];
-        const source = typeof link.source === 'object' ? link.source : nodes.find(n => n.id === link.source);
-        const target = typeof link.target === 'object' ? link.target : nodes.find(n => n.id === link.target);
+      for (let j = 0; j < resolvedLinks.length; j++) {
+        const link = resolvedLinks[j];
+        const source = link.source;
+        const target = link.target;
 
         if (!source || !target || source.x === undefined || target.x === undefined) continue;
         if (node.id === source.id || node.id === target.id) continue;
@@ -129,6 +130,21 @@ export const createLinkCollideForce = (links: any[]) => {
 
   force.initialize = function (_nodes: any[]) {
     nodes = _nodes;
+
+    const nodeMap = new Map();
+    for (let i = 0; i < nodes.length; i++) {
+      nodeMap.set(nodes[i].id, nodes[i]);
+    }
+
+    resolvedLinks = [];
+    for (let i = 0; i < links.length; i++) {
+      const l = links[i];
+      const s = typeof l.source === 'object' ? l.source : nodeMap.get(l.source);
+      const t = typeof l.target === 'object' ? l.target : nodeMap.get(l.target);
+      if (s && t) {
+        resolvedLinks.push({ ...l, source: s, target: t });
+      }
+    }
   };
 
   return force;
@@ -414,6 +430,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [searchFilter, setSearchFilter] = useState<'all' | 'group' | 'device' | 'interface'>('all');
+  const [isPathRendering, setIsPathRendering] = useState(false);
 
   const nodeCoordsRef = useRef<Record<string, { x: number; y: number; z: number }>>({});
   const visibleNodesRef = useRef<any[]>([]);
@@ -1273,7 +1290,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
     }
 
     return { nodes, links };
-  }, [data, expandedGroups, expandedDevices, activeGroupId, activeDeviceId, pathHighlight, getGroupInitialCoords, getDeviceInitialCoords, getRingInitialCoords]);
+  }, [data, expandedGroups, expandedDevices, activeGroupId, activeDeviceId, getGroupInitialCoords, getDeviceInitialCoords, getRingInitialCoords]);
 
   useEffect(() => {
     visibleNodesRef.current = visibleData.nodes;
@@ -1462,6 +1479,26 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
             highlightNodes.add(tId);
           }
         }
+        
+        // 그룹-그룹 링크: aggregatedLinks에 경로 링크가 포함되어 있는지 확인
+        if ((link as any).isGroupToGroup && (link as any).aggregatedLinks) {
+          const hasPathLink = (link as any).aggregatedLinks.some((al: any) => {
+            const alSrc = typeof al.source === 'object' ? al.source.id : al.source;
+            const alTgt = typeof al.target === 'object' ? al.target.id : al.target;
+            return pathHighlight.linkPairs.has(`${alSrc}-${alTgt}`) || pathHighlight.linkPairs.has(`${alTgt}-${alSrc}`);
+          });
+          if (hasPathLink) {
+            highlightLinks.add(link as any);
+            if (link as any && (link as any).source !== undefined && (link as any).target !== undefined) {
+              const tempS = typeof (link as any).source === 'object' ? (link as any).source.id : (link as any).source;
+              const tempT = typeof (link as any).target === 'object' ? (link as any).target.id : (link as any).target;
+              highlightLinkIds.current.add(tempS + '-' + tempT);
+              highlightLinkIds.current.add(tempT + '-' + tempS);
+            }
+            highlightNodes.add(sId);
+            highlightNodes.add(tId);
+          }
+        }
 
         // 그룹-장비 계층 링크: 장비가 하이라이트 되어있으면 계층 링크도 하이라이트
         if ((link as any).isHierarchyLink || (link as any).isGroupToDevice) {
@@ -1513,20 +1550,48 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           const s = typeof link.source === 'object' ? link.source.id : link.source;
           const t = typeof link.target === 'object' ? link.target.id : link.target;
 
-          if (s === hoverNode.id || t === hoverNode.id) {
-            let isValid = true;
-            const otherId = s === hoverNode.id ? t : s;
+          let sDevice = s;
+          let tDevice = t;
+          let origS = link.originalSource || s;
+          let origT = link.originalTarget || t;
 
+          const sNode = targetNodes.find((n: any) => n.id === s);
+          if (sNode?.isInterfaceNode && sNode.parentDeviceId) sDevice = sNode.parentDeviceId;
+          const tNode = targetNodes.find((n: any) => n.id === t);
+          if (tNode?.isInterfaceNode && tNode.parentDeviceId) tDevice = tNode.parentDeviceId;
+
+          const targetHoverId = hoverNode.id;
+          
+          let isMatch = false;
+          let otherId = null;
+
+          if (hoverNode.isInterfaceNode) {
+            if (s === targetHoverId || t === targetHoverId) {
+               isMatch = true;
+               otherId = (s === targetHoverId) ? tDevice : sDevice;
+            }
+          } else {
+            if (sDevice === targetHoverId || tDevice === targetHoverId || s === targetHoverId || t === targetHoverId) {
+               isMatch = true;
+               otherId = (sDevice === targetHoverId || s === targetHoverId) ? tDevice : sDevice;
+            }
+          }
+
+          if (isMatch) {
+            let isValid = true;
             // 현재 뎁스(그룹/장비)에 진입한 상태라면, 활성화되지 않은 배경 노드(타 그룹 노드 등)로 뻗어가는 선은 하이라이트 제외
-            if (activeGroupId !== null) {
-              const otherNode = visibleData.nodes.find((n: any) => n.id === otherId);
-              if (otherNode && otherNode.isGroupNode && otherNode.deviceGroupId !== activeGroupId) {
-                isValid = false;
-              }
-            } else if (activeDeviceId !== null) {
-              const otherNode = visibleData.nodes.find((n: any) => n.id === otherId);
-              if (otherNode && otherNode.isDeviceNode && otherNode.id !== activeDeviceId) {
-                isValid = false;
+            // 단, 인터페이스 호버 시에는 타장비와의 연결선도 활성화되어야 하므로 제외 조건 적용하지 않음
+            if (!hoverNode.isInterfaceNode) {
+              if (activeGroupId !== null) {
+                const otherNode = visibleData.nodes.find((n: any) => n.id === otherId);
+                if (otherNode && otherNode.isGroupNode && otherNode.deviceGroupId !== activeGroupId) {
+                  isValid = false;
+                }
+              } else if (activeDeviceId !== null) {
+                const otherNode = visibleData.nodes.find((n: any) => n.id === otherId);
+                if (otherNode && otherNode.isDeviceNode && otherNode.id !== activeDeviceId) {
+                  isValid = false;
+                }
               }
             }
 
@@ -1538,8 +1603,19 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
                 highlightLinkIds.current.add(tempS + '-' + tempT);
                 highlightLinkIds.current.add(tempT + '-' + tempS);
               }
+              // 인터페이스 호버 시, 해당 데이터 링크 양끝의 (장비<->인터페이스) 계층 링크도 강제 활성화
+              if (hoverNode.isInterfaceNode) {
+                highlightLinkIds.current.add(sDevice + '-' + s);
+                highlightLinkIds.current.add(s + '-' + sDevice);
+                highlightLinkIds.current.add(tDevice + '-' + t);
+                highlightLinkIds.current.add(t + '-' + tDevice);
+              }
+              highlightNodes.add(sDevice);
+              highlightNodes.add(tDevice);
               highlightNodes.add(s);
               highlightNodes.add(t);
+              highlightNodes.add(origS);
+              highlightNodes.add(origT);
             }
           }
         });
@@ -1771,15 +1847,8 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
     // });
 
     let activeNodes = [];
-    const ph = stateRef.current.pathHighlight;
 
-    if (ph) {
-      // 경로 탐색 및 링크 격리의 경우 최신 상태인 stateRef를 사용하여 클로저 문제(Stale Closure)를 방지합니다.
-      activeNodes = nodes.filter((n: any) => {
-        if (!n.isDeviceNode) return false;
-        return (ph.deviceIds.has(n.id) || ph.deviceIds.has(String(n.id))) && typeof n.x === 'number';
-      });
-    } else if (explicitRingId) {
+    if (explicitRingId) {
       const ringIndex = parseInt(explicitRingId.replace('ring-', ''), 10);
       const ring = RINGS[ringIndex];
       if (ring) {
@@ -1979,6 +2048,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
     );
   }, []);
 
+  const handleEngineStop = useCallback(() => {
+    if (isPathRendering) {
+      setIsPathRendering(false);
+      zoomToFitActiveNodes(1200, 20, null, null);
+    }
+  }, [isPathRendering, zoomToFitActiveNodes]);
+
   // 2D 모드에서 3D 모드로 전환될 때 현재 활성화된 노드가 있다면 화면에 꽉 차게 줌인
   const prevIs2DMode = useRef(is2DMode);
   useEffect(() => {
@@ -1989,8 +2065,6 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
         const targetPadding = 100;
 
         setTimeout(() => zoomToFitActiveNodes(1200, targetPadding, activeGroupId, activeDeviceId), 300);
-        setTimeout(() => zoomToFitActiveNodes(1000, targetPadding, activeGroupId, activeDeviceId), 1200);
-        setTimeout(() => zoomToFitActiveNodes(1000, targetPadding, activeGroupId, activeDeviceId), 2500);
       }
     }
     // 3D <-> 2D 전환 시 열려있는 툴팁/팝오버 닫기
@@ -4325,7 +4399,10 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
         setHoverNode(null);
       } else {
         const targetNodes = is2DMode ? data.nodes : visibleData.nodes;
-        const isHoverNodeVisible = externalHoverNode.isRingNode || targetNodes.some((n: any) => n.id === externalHoverNode.id);
+        const isHoverNodeVisible = externalHoverNode.isRingNode || targetNodes.some((n: any) => 
+          String(n.id) === String(externalHoverNode.id) || 
+          (externalHoverNode.parentDeviceId && String(n.id) === String(externalHoverNode.parentDeviceId))
+        );
         if (isHoverNodeVisible) {
           setHoverNode(externalHoverNode);
         } else {
@@ -4670,6 +4747,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
             d3VelocityDecay={0.6}   // 부드러운 감속으로 용수철 반동은 억제하되 이동 속도 확보
             warmupTicks={300}       // 기존 120틱보다 훨씬 늘린 300틱 사전 연산을 통해 새로고침 시마다 완벽하게 동일한 평형 상태(고정된 배치)로 시작하도록 보장
             cooldownTicks={100}     // 추가적으로 100틱 동안 엔진을 더 안정화
+            onEngineStop={handleEngineStop}
           />
         )
       )}
@@ -5024,34 +5102,47 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           setPathHighlight(highlight);
           if (highlight) {
             setIsAutoRotating(false);
+            const involvedGroupIds = new Set<number>();
+            if (highlight && highlight.deviceIds) {
+              highlight.deviceIds.forEach(deviceId => {
+                const node = data.nodes.find(n => String(n.id) === String(deviceId));
+                if (node && node.deviceGroupId !== undefined) {
+                  involvedGroupIds.add(node.deviceGroupId);
+                }
+              });
+            }
+
             // 경로가 포함된 그룹 노드 자동 확장 (시작/끝 그룹 및 경로상에 있는 모든 경유 그룹 포함)
+            let groupsChanged = false;
             setExpandedGroups(prev => {
+              let hasNew = false;
+              expandGroupIds.forEach(gid => {
+                if (!prev.has(gid)) hasNew = true;
+              });
+              involvedGroupIds.forEach(gid => {
+                if (!prev.has(gid)) hasNew = true;
+              });
+              
+              if (!hasNew) return prev;
+              
+              groupsChanged = true;
               const next = new Set(prev);
               expandGroupIds.forEach(gid => next.add(gid));
-
-              if (highlight && highlight.deviceIds) {
-                highlight.deviceIds.forEach(deviceId => {
-                  const node = data.nodes.find(n => n.id === deviceId);
-                  if (node && node.deviceGroupId !== undefined) {
-                    next.add(node.deviceGroupId);
-                  }
-                });
-              }
-
+              involvedGroupIds.forEach(gid => next.add(gid));
               return next;
             });
-            // 경로 하이라이트 시 다른 포커스 상태 초기화
+            // 사용자의 요청에 따라 경로 탐색 시 무조건 1뎁스(루트)로 리셋하여 경로 탐색 화면이 노출되도록 함
             setActiveGroupId(null);
             setActiveDeviceId(null);
-            setSelectedNode(null);
-            setClickedNode(null);
+            onNodeClick(null);
 
-            // 경로 탐색 시 화면에 꽉 차도록 패딩을 줄여서 줌
-            // ForceGraph의 물리 엔진이 노드들을 펼치는 시간을 고려하여 줌을 여러 번 실행합니다.
-            setTimeout(() => zoomToFitActiveNodes(1200, 20, null, null), 150);
-            setTimeout(() => zoomToFitActiveNodes(1000, 20, null, null), 1200);
-            // 모든 노드가 물리엔진에 의해 최종 위치에 도달한 후 다시 한번 정확하게 타겟팅합니다.
-            setTimeout(() => zoomToFitActiveNodes(1000, 20, null, null), 2500);
+            if (groupsChanged) {
+              // 새로운 그룹이 추가되어 물리 엔진 재시작이 필요한 경우만 오버레이 표시 및 onEngineStop 대기
+              setIsPathRendering(true);
+            } else {
+              // 이미 모든 그룹이 열려있다면 즉시 줌 실행 (미리 준비됨)
+              setTimeout(() => zoomToFitActiveNodes(1200, 20, null, null), 50);
+            }
           } else {
             // 경로 하이라이트 해제 시 확장 그룹 및 장비도 초기화
             setExpandedGroups(new Set());
@@ -5218,7 +5309,14 @@ function createGlowTexture() {
 }
 
 // Helper function to create canvas text texture for labels
+const textCanvasCache: Record<string, THREE.CanvasTexture> = {};
+
 function createTextCanvas(text: string, opacity: number, nodeType: string, badgeConfig?: { text: string; color: string }) {
+  const cacheKey = `${text}_${opacity}_${nodeType}_${badgeConfig ? badgeConfig.text + badgeConfig.color : 'none'}`;
+  if (textCanvasCache[cacheKey]) {
+    return textCanvasCache[cacheKey];
+  }
+
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
   canvas.width = 1024; // Double the width for high-DPI clarity
@@ -5418,5 +5516,6 @@ function createTextCanvas(text: string, opacity: number, nodeType: string, badge
   texture.wrapS = THREE.ClampToEdgeWrapping;
   texture.wrapT = THREE.ClampToEdgeWrapping;
 
+  textCanvasCache[cacheKey] = texture;
   return texture;
 }
