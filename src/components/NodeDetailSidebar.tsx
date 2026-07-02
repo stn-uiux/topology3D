@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { ChevronRight, X, Activity, Server, Network } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { ChevronRight, ChevronDown, ChevronUp, X, Activity, Server, Network } from 'lucide-react';
 import { GraphNode, GraphData, groupsMetadata, RINGS } from '../data';
 import { mockNodeAlarms, mockLinkAlarms, getMaxSeverity, ALARM_CAUSES } from './NetworkGraph';
 
@@ -51,6 +51,18 @@ const SeverityBadge = ({ severity }: { severity?: string }) => {
 };
 
 export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onClose, onNodeClick, graphData }) => {
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  
+  const toggleExpand = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
 
   const getActualSeverity = (n: GraphNode) => {
     let maxSev = mockNodeAlarms[n.id] || 'normal';
@@ -166,7 +178,7 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
             <p className="text-lg font-bold text-white">{title}</p>
             <SeverityBadge severity={nodeSeverity} />
           </div>
-          <p className="text-xs text-blue-400">{groupLabel}</p>
+          {!node.isGroupNode && <p className="text-xs text-blue-400">{groupLabel}</p>}
           
           {nodeSeverity && nodeSeverity !== 'normal' && (
             <div
@@ -234,29 +246,89 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
           <section>
             <h3 className="text-sm font-bold text-gray-300 mb-4 tracking-wide">하위 장비 리스트</h3>
             <div className="space-y-2">
-              {subDevices.map(dev => (
-                <div key={dev.id} className="p-2 bg-[#0a0b0e] border border-[#2d3748] rounded flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Server className="w-3.5 h-3.5 text-blue-400 mr-2" />
-                    <div>
-                      <div className="flex items-center">
-                        <p className="text-xs font-bold text-white">{dev.label.split('\n')[1] || dev.label.split('\n')[0]}</p>
-                        <SeverityBadge severity={getActualSeverity(dev)} />
+              {subDevices.map(dev => {
+                const devLinks = graphData.links.filter(link => {
+                  if (link.isHierarchyLink) return false;
+                  const sDevId = (link as any).originalSource;
+                  const tDevId = (link as any).originalTarget;
+                  return sDevId === dev.id || tDevId === dev.id;
+                }).map(link => ({ link }));
+
+                const isExpanded = expandedIds.has(dev.id);
+
+                return (
+                  <div key={dev.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
+                    <div className={`flex items-center justify-between p-2 transition-colors ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}>
+                      <div 
+                        className="flex items-center cursor-pointer hover:bg-[#1a202c] p-1 -m-1 rounded transition-colors flex-1"
+                        onClick={() => onNodeClick && onNodeClick(dev)}
+                        title="해당 장비로 이동"
+                      >
+                        <Server className="w-3.5 h-3.5 text-blue-400 mr-2" />
+                        <div>
+                          <div className="flex items-center">
+                            <p className="text-xs font-bold text-white hover:text-blue-300 transition-colors">{dev.label.split('\n')[1] || dev.label.split('\n')[0]}</p>
+                            <SeverityBadge severity={getActualSeverity(dev)} />
+                          </div>
+                          {dev.ipAddr && <p className="text-[10px] text-gray-500 font-mono">{dev.ipAddr}</p>}
+                        </div>
                       </div>
-                      {dev.ipAddr && <p className="text-[10px] text-gray-500 font-mono">{dev.ipAddr}</p>}
+                      {devLinks.length > 0 && (
+                        <button 
+                          onClick={(e) => toggleExpand(dev.id, e)}
+                          className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer ml-2"
+                          title={isExpanded ? "링크 정보 접기" : "링크 정보 펼치기"}
+                        >
+                          {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2.5]" /> : <ChevronDown className="w-5 h-5 stroke-[2.5]" />}
+                        </button>
+                      )}
                     </div>
+                    
+                    {isExpanded && devLinks.length > 0 && (
+                      <div className="px-2 pt-2 pb-2 text-[11px]">
+                        {devLinks.map(({ link }, idx) => {
+                          const srcDevName = (link as any).srcDeviceName || '';
+                          const srcIntfName = (link as any).srcInterfaceName || '';
+                          const dstDevName = (link as any).dstDeviceName || '';
+                          const dstIntfName = (link as any).dstInterfaceName || '';
+                          const total = (link as any).totalBandWidth || 0;
+                          const traffic = (link as any).traffic || 0;
+                          const avail = Math.max(0, total - traffic);
+                          const usage = (link as any).usage || 0;
+                          const isSrcSelf = (link as any).originalSource === dev.id;
+                          
+                          return (
+                            <div key={idx} className="pb-2.5 mb-2.5 last:mb-0 last:pb-0 border-b border-[#2d3748]/50 last:border-0">
+                              <div className="flex items-center flex-wrap font-bold">
+                                <span className={isSrcSelf ? 'text-gray-300' : 'text-cyan-300'}>{srcDevName}</span>
+                                <span className="text-gray-400 font-normal ml-1.5">{srcIntfName}</span>
+                                <span className="text-green-500 mx-2 text-[10px]">↔</span>
+                                <span className={isSrcSelf ? 'text-cyan-300' : 'text-gray-300'}>{dstDevName}</span>
+                                <span className="text-gray-400 font-normal ml-1.5">{dstIntfName}</span>
+                              </div>
+                              <div className="flex items-center justify-between text-gray-400 mt-1">
+                                <span>총 대역폭 <span className="text-gray-200 font-mono font-bold">{total.toFixed(1)} Gbps</span></span>
+                                <div className="flex items-center space-x-1.5">
+                                  <span>사용률</span>
+                                  <div className="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                    <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, usage))}%`, background: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }} />
+                                  </div>
+                                  <span className="font-mono font-bold" style={{ color: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }}>{usage.toFixed(1)}%</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center space-x-2 text-gray-400 mt-0.5">
+                                <span>사용대역폭 <span className="text-emerald-400 font-mono font-bold">{traffic.toFixed(1)} Gbps</span></span>
+                                <span>/</span>
+                                <span>가용대역폭 <span className="text-green-500 font-mono font-bold">{avail.toFixed(1)} Gbps</span></span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-                  {onNodeClick && (
-                    <button 
-                      onClick={() => onNodeClick(dev)}
-                      className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer"
-                      title="해당 장비로 이동"
-                    >
-                      <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-                    </button>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         )}
@@ -273,31 +345,37 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                   return sIntf === inf.id || tIntf === inf.id;
                 });
 
+                const isExpanded = expandedIds.has(inf.id);
+
                 return (
                   <div key={inf.id} className="bg-[#0a0b0e] border border-[#2d3748] rounded flex flex-col overflow-hidden">
-                    <div className="p-2 flex items-center justify-between">
-                      <div className="flex items-center">
+                    <div className={`p-2 flex items-center justify-between transition-colors ${isExpanded ? 'bg-[#1a1f2e]' : ''}`}>
+                      <div 
+                        className="flex items-center cursor-pointer hover:bg-[#1a202c] p-1 -m-1 rounded transition-colors flex-1"
+                        onClick={() => onNodeClick && onNodeClick(inf)}
+                        title="해당 포트로 이동"
+                      >
                         <Network className="w-3.5 h-3.5 text-green-400 mr-2" />
                         <div>
                           <div className="flex items-center">
-                            <p className="text-xs font-bold text-white">{inf.interfaceName || inf.label}</p>
+                            <p className="text-xs font-bold text-white hover:text-blue-300 transition-colors">{inf.interfaceName || inf.label}</p>
                             <SeverityBadge severity={getActualSeverity(inf)} />
                           </div>
                           {inf.ipAddr && <p className="text-[10px] text-gray-500 font-mono">{inf.ipAddr}</p>}
                         </div>
                       </div>
-                      {onNodeClick && (
+                      {infLinkObj && (
                         <button 
-                          onClick={() => onNodeClick(inf)}
-                          className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer shrink-0"
-                          title="해당 포트로 이동"
+                          onClick={(e) => toggleExpand(inf.id, e)}
+                          className="p-1.5 text-white/70 hover:text-white bg-transparent rounded transition-colors cursor-pointer shrink-0 ml-2"
+                          title={isExpanded ? "링크 정보 접기" : "링크 정보 펼치기"}
                         >
-                          <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+                          {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2.5]" /> : <ChevronDown className="w-5 h-5 stroke-[2.5]" />}
                         </button>
                       )}
                     </div>
 
-                    {infLinkObj && (() => {
+                    {isExpanded && infLinkObj && (() => {
                       const link = infLinkObj.link;
                       const srcDevName = (link as any).srcDeviceName || '';
                       const srcIntfName = (link as any).srcInterfaceName || '';
@@ -309,53 +387,32 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                       const avail = Math.max(0, total - traffic);
                       const usage = (link as any).usage || 0;
 
+                      const isSrcSelf = (link as any).originalSource === node.id;
+
                       return (
-                        <div className="px-3 py-2.5 border-t border-[#2d3748] bg-[#11141b] flex flex-col space-y-2">
-                          <div className="flex items-center text-blue-400 font-bold text-[10px] flex-wrap">
-                            <div className="flex items-center">
-                              <span>{srcDevName}</span>
-                              {(() => {
-                                const srcId = (link as any).source?.id || (link as any).source;
-                                const tgtId = (link as any).target?.id || (link as any).target;
-                                const linkKey = [String(srcId), String(tgtId)].sort().join('--');
-                                const sev = (link as any).srcSeverity || (link as any).severity || mockLinkAlarms[linkKey];
-                                return <SeverityBadge severity={sev} />;
-                              })()}
-                            </div>
+                        <div className="px-3 py-2 text-[11px]">
+                          <div className="flex items-center font-bold mb-1.5 flex-wrap">
+                            <span className={isSrcSelf ? 'text-gray-300' : 'text-cyan-300'}>{srcDevName}</span>
                             <span className="text-gray-400 font-normal ml-1.5">{srcIntfName}</span>
-                            <span className="text-green-500 mx-1.5 text-[9px]">↔</span>
-                            <div className="flex items-center">
-                              <span>{dstDevName}</span>
-                              {(() => {
-                                const srcId = (link as any).source?.id || (link as any).source;
-                                const tgtId = (link as any).target?.id || (link as any).target;
-                                const linkKey = [String(srcId), String(tgtId)].sort().join('--');
-                                const sev = (link as any).dstSeverity || (link as any).severity || mockLinkAlarms[linkKey];
-                                return <SeverityBadge severity={sev} />;
-                              })()}
-                            </div>
+                            <span className="text-green-500 mx-2 text-[10px]">↔</span>
+                            <span className={isSrcSelf ? 'text-cyan-300' : 'text-gray-300'}>{dstDevName}</span>
                             <span className="text-gray-400 font-normal ml-1.5">{dstIntfName}</span>
                           </div>
                           
-                          <div className="w-full flex flex-col space-y-1 mt-0.5">
-                            <div className="flex items-center justify-between text-[10px] text-gray-400 w-full">
-                              <span>총 대역폭 <span className="text-gray-200 font-mono font-bold">{total.toFixed(1)} Gbps</span></span>
-                              <div className="flex items-center space-x-1.5 shrink-0 text-gray-500 justify-end">
-                                <span>사용률</span>
-                                <div className="w-10 h-1 bg-gray-800 rounded-full overflow-hidden">
-                                  <div 
-                                    className="h-full bg-emerald-400 rounded-full" 
-                                    style={{ width: `${Math.min(100, Math.max(0, usage))}%` }} 
-                                  />
-                                </div>
-                                <span className="text-emerald-400 font-mono font-bold min-w-[32px] text-right">{usage.toFixed(1)}%</span>
+                          <div className="flex items-center justify-between text-gray-400">
+                            <span>총 대역폭 <span className="text-gray-200 font-mono font-bold">{total.toFixed(1)} Gbps</span></span>
+                            <div className="flex items-center space-x-1.5">
+                              <span>사용률</span>
+                              <div className="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, usage))}%`, background: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }} />
                               </div>
+                              <span className="font-mono font-bold" style={{ color: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }}>{usage.toFixed(1)}%</span>
                             </div>
-                            <div className="flex items-center space-x-2 text-[10px] text-gray-400 w-full">
-                              <span>사용대역폭 <span className="text-emerald-400 font-mono font-bold">{traffic.toFixed(1)} Gbps</span></span>
-                              <span className="text-gray-600">/</span>
-                              <span>가용대역폭 <span className="text-emerald-400 font-mono font-bold">{avail.toFixed(1)} Gbps</span></span>
-                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2 text-gray-400 mt-0.5">
+                            <span>사용대역폭 <span className="text-emerald-400 font-mono font-bold">{traffic.toFixed(1)} Gbps</span></span>
+                            <span>/</span>
+                            <span>가용대역폭 <span className="text-green-500 font-mono font-bold">{avail.toFixed(1)} Gbps</span></span>
                           </div>
                         </div>
                       );
@@ -368,7 +425,7 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
         )}
 
         {/* Connected External Systems */}
-        {(node.isGroupNode || node.isInterfaceNode) && externalLinks.length > 0 && (
+        {(!node.isGroupNode && node.isInterfaceNode) && externalLinks.length > 0 && (
           <section>
             <h3 className="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wide">
               NETWORK LINK
@@ -389,9 +446,12 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                   <div key={idx} className="py-3 first:pt-0 border-b border-[#2d3748] last:border-0 flex flex-col space-y-2.5">
                     
                     {/* 상단: 장비 및 인터페이스명 */}
-                    <div className="flex items-center text-blue-400 font-bold text-[11px] flex-wrap">
+                    <div className="flex items-center font-bold text-[11px] flex-wrap">
+                      {(() => {
+                        const isSrcSelf = (link as any).originalSource === node.parentDeviceId;
+                        return <>
                       <div className="flex items-center">
-                        <span>{srcDevName}</span>
+                        <span className={isSrcSelf ? 'text-gray-300' : 'text-cyan-300'}>{srcDevName}</span>
                         {(() => {
                           const srcId = (link as any).source?.id || (link as any).source;
                           const tgtId = (link as any).target?.id || (link as any).target;
@@ -403,7 +463,7 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                       <span className="text-gray-400 font-normal ml-1.5">{srcIntfName}</span>
                       <span className="text-green-500 mx-2 text-[10px]">↔</span>
                       <div className="flex items-center">
-                        <span>{dstDevName}</span>
+                        <span className={isSrcSelf ? 'text-cyan-300' : 'text-gray-300'}>{dstDevName}</span>
                         {(() => {
                           const srcId = (link as any).source?.id || (link as any).source;
                           const tgtId = (link as any).target?.id || (link as any).target;
@@ -413,27 +473,22 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
                         })()}
                       </div>
                       <span className="text-gray-400 font-normal ml-1.5">{dstIntfName}</span>
+                      </>;
+                      })()}
                     </div>
                     
                     {/* 중단/하단: 대역폭 및 사용률 정보 */}
                     <div className="w-full flex flex-col space-y-1 mt-1">
-                      {/* 총 대역폭 & 사용률 (우측정렬) */}
                       <div className="flex items-center justify-between text-[11px] text-gray-400 w-full">
                         <span>총 대역폭 <span className="text-gray-200 font-mono font-bold">{total.toFixed(1)} Gbps</span></span>
-                        
-                        <div className="flex items-center space-x-1.5 shrink-0 text-gray-500 justify-end">
+                        <div className="flex items-center space-x-1.5">
                           <span>사용률</span>
-                          <div className="w-12 h-1 bg-gray-800 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-emerald-400 rounded-full" 
-                              style={{ width: `${Math.min(100, Math.max(0, usage))}%` }} 
-                            />
+                          <div className="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                            <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, usage))}%`, background: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }} />
                           </div>
-                          <span className="text-emerald-400 font-mono font-bold min-w-[36px] text-right">{usage.toFixed(1)}%</span>
+                          <span className="font-mono font-bold" style={{ color: usage > 80 ? '#ef4444' : usage > 50 ? '#f59e0b' : '#34d399' }}>{usage.toFixed(1)}%</span>
                         </div>
                       </div>
-                      
-                      {/* 사용대역폭 / 가용대역폭 */}
                       <div className="flex items-center space-x-2 text-[11px] text-gray-400 w-full">
                         <span>사용대역폭 <span className="text-emerald-400 font-mono font-bold">{traffic.toFixed(1)} Gbps</span></span>
                         <span>/</span>
@@ -449,12 +504,7 @@ export const NodeDetailSidebar: React.FC<NodeDetailSidebarProps> = ({ node, onCl
 
       </div>
       
-      {/* Footer Action */}
-      <div className="p-4 border-t border-[#2d3748] bg-[#1a202c]">
-        <button className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded text-sm font-semibold transition-colors shadow-lg shadow-blue-500/20">
-          경로 추적
-        </button>
-      </div>
+
     </aside>
   );
 };
