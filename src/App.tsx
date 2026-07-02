@@ -174,7 +174,7 @@ export default function App() {
                 onClick={() => setIs2DMode(true)}
                 className={`px-3 py-1.5 text-xs font-bold rounded cursor-pointer ${is2DMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
               >
-                2D Architecture
+                2D Topology
               </button>
             </div>
           </div>
@@ -189,7 +189,10 @@ export default function App() {
         </header>
 
         {/* Graph Area */}
-        <div className="flex-1 pt-16 relative bg-transparent">
+        <div 
+          className="flex-1 flex flex-col pt-16 relative bg-transparent transition-all duration-300"
+          style={{ paddingRight: is2DMode && selectedNode && !selectedNode.isRingNode ? '400px' : '0px' }}
+        >
           {loading && (
             <div className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-transparent">
               <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-4" />
@@ -308,7 +311,7 @@ export default function App() {
                 <X className="w-4 h-4" />
               </button>
             </div>
-            
+
             <div className="p-5 flex flex-col space-y-4">
               <div>
                 <h3 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">내장된 테스트 파일</h3>
@@ -325,7 +328,7 @@ export default function App() {
                   ))}
                 </div>
               </div>
-              
+
               <div className="relative flex py-2 items-center">
                 <div className="flex-grow border-t border-[#2d3748]"></div>
                 <span className="flex-shrink-0 mx-4 text-gray-500 text-[11px] font-semibold">또는</span>

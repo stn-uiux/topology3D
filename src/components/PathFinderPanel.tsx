@@ -325,7 +325,7 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
     setModalTarget(null);
   }, [modalTarget]);
 
-  const handleClear = useCallback(() => {
+  const handleClear = useCallback((isProgrammatic = false) => {
     setSrcDevice(null);
     setDstDevice(null);
     setSrcGroup(null);
@@ -334,7 +334,9 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
     setSelectedPathIdx(null);
     setHasSearched(false);
     setIsExpanded(false);
-    onPathSelect(null, []);
+    if (isProgrammatic !== true) {
+      onPathSelect(null, []);
+    }
     onClear?.();
   }, [onPathSelect, onClear]);
 
@@ -344,7 +346,7 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
   useEffect(() => {
     if (resetTrigger && resetTrigger !== lastResetTriggerRef.current) {
       lastResetTriggerRef.current = resetTrigger;
-      handleClear();
+      handleClear(true);
     }
   }, [resetTrigger, handleClear]);
 
@@ -381,11 +383,16 @@ const PathFinderPanel: React.FC<PathFinderPanelProps> = ({ onPathSelect, resetTr
   // (자동 탐색 제거: 탐색 버튼 클릭 시에만 수동으로 탐색하도록 변경)
   const lastAutoSearchTriggerRef = useRef(0);
 
-  // 경로 신호등 색상 (순위별)
+  // 경로 번호별 색상 (상위부터)
   const getPathColor = (idx: number) => {
     const colors = ['#22d3ee', '#34d399', '#a78bfa', '#fbbf24', '#f87171'];
     return colors[idx % colors.length];
   };
+
+  // 탐색 조건이나 결과가 모두 없으면 패널 자체를 숨김 (닫기)
+  if (!srcDevice && !dstDevice && !srcGroup && !dstGroup && results.length === 0) {
+    return null;
+  }
 
   return (
     <>

@@ -371,7 +371,6 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
         linkForce.distance(getLinkDistance);
         linkForce.strength(getLinkStrength);
       }
-      // instance.d3ReheatSimulation();
     }
   }, []);
   const clickTimeoutRef = useRef<any>(null);
@@ -431,6 +430,28 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [searchFilter, setSearchFilter] = useState<'all' | 'group' | 'device' | 'interface'>('all');
   const [isPathRendering, setIsPathRendering] = useState(false);
+
+  // 컨텍스트 메뉴 외부 클릭 및 스크롤 시 닫기
+  useEffect(() => {
+    if (!contextMenu) return;
+    const handleClose = (e: Event) => {
+      // 클릭한 대상이 컨텍스트 메뉴 내부라면 무시 (버튼 클릭 이벤트가 정상 동작하도록 함)
+      if (e.target instanceof Element && e.target.closest('.context-menu-wrapper')) {
+        return;
+      }
+      setContextMenu(null);
+    };
+    
+    window.addEventListener('mousedown', handleClose, { capture: true });
+    window.addEventListener('wheel', handleClose, { capture: true, passive: true });
+    window.addEventListener('contextmenu', handleClose, { capture: true });
+
+    return () => {
+      window.removeEventListener('mousedown', handleClose, { capture: true });
+      window.removeEventListener('wheel', handleClose, { capture: true });
+      window.removeEventListener('contextmenu', handleClose, { capture: true });
+    };
+  }, [contextMenu]);
 
   const nodeCoordsRef = useRef<Record<string, { x: number; y: number; z: number }>>({});
   const visibleNodesRef = useRef<any[]>([]);
@@ -1520,7 +1541,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       return;
     }
 
-    if (hoverNode !== null && activeDeviceId === null) {
+    if (hoverNode !== null) {
       highlightNodes.add(hoverNode.id);
 
       if (hoverNode.isRingNode) {
@@ -2084,6 +2105,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       setClickedLink(null);
       setHoverLink(null);
       setTooltipPos(null);
+
+      // 노드 클릭으로 뎁스 이동 시 노드 탐색 패널 닫기 및 초기화
+      setPathFinderResetTrigger(prev => prev + 1);
+      setExternalSrcGroup(null);
+      setExternalDstGroup(null);
+      setExternalSrcDevice(null);
+      setExternalDstDevice(null);
       // console.log('[handleNodeClick]', { id: node.id, isGroupNode: node.isGroupNode, isDeviceNode: node.isDeviceNode, deviceGroupId: node.deviceGroupId });
       let targetForZoomAndSelect: GraphNode | null = node;
 
@@ -4413,7 +4441,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
   }, [externalHoverNode, is2DMode, data.nodes, visibleData.nodes]);
 
   return (
-    <div ref={containerRef} className="graph-container absolute top-16 left-0 right-0 bottom-0 bg-transparent overflow-hidden" style={{ cursor: 'default' }}>
+    <div ref={containerRef} className="graph-container flex-1 w-full relative bg-transparent overflow-hidden" style={{ cursor: 'default' }}>
 
       {/* Sleek Breadcrumb / Navigation Bar */}
       <div className="absolute top-4 left-6 z-10 pointer-events-auto flex items-center space-x-2 bg-[#161920]/90 backdrop-blur-md border border-[#2d3748] rounded-md px-3.5 py-1.5 shadow-2xl text-[11px] font-bold text-gray-400">
@@ -5157,7 +5185,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       {/* Context Menu for Node Right Click */}
       {contextMenu && (
         <div
-          className="fixed z-[9999] bg-[#1a1d26] border border-[#2d3748] rounded-md shadow-2xl overflow-hidden min-w-[140px]"
+          className="context-menu-wrapper fixed z-[9999] bg-[#1a1d26] border border-[#2d3748] rounded-md shadow-2xl overflow-hidden min-w-[140px]"
           style={{ top: contextMenu.y, left: contextMenu.x }}
         >
           <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 border-b border-[#2d3748] bg-[#0d0f14] truncate">

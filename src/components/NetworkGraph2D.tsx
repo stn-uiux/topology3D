@@ -489,19 +489,25 @@ const NetworkGraph2DContent: React.FC<NetworkGraph2DProps> = ({
   const [resizeVersion, setResizeVersion] = useState(0);
   const { fitBounds, getNode, getEdges, getNodes, fitView, setCenter } = useReactFlow();
 
-  // Window resize event listener to center the graph
+  // Container resize event listener to center the graph (handles CSS transitions)
   useEffect(() => {
     let timeoutId: any;
     const handleResize = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setResizeVersion(v => v + 1);
-      }, 200);
+      }, 100);
     };
+
+    const observer = new ResizeObserver(handleResize);
+    const rfElement = document.querySelector('.react-flow');
+    if (rfElement) observer.observe(rfElement);
     window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener('resize', handleResize);
-      clearTimeout(timeoutId);
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
@@ -1088,10 +1094,10 @@ const NetworkGraph2DContent: React.FC<NetworkGraph2DProps> = ({
 
       timeoutId = setTimeout(tryZoom, 50);
     } else if (!activeNodeId) {
-      // ???깆쓧嶺? 嶺뚮씭?ｉ뜮?getNodes()?????닷젆???덈펲嶺??잙갭梨뜻틦?fitView ?筌뤾쑵??
+      // 선택된 노드가 없을 때 전체 줌 (ResizeObserver가 트랜지션 완료를 감지하므로 짧은 딜레이 사용)
       timeoutId = setTimeout(() => {
         if (!isCancelled) fitView({ duration: 500, padding: 0.1 });
-      }, 100);
+      }, 50);
     }
 
     return () => {
