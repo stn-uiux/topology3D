@@ -4321,9 +4321,19 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
   // 외부(사이드바 등)에서 호버된 노드 상태 동기화
   useEffect(() => {
     if (externalHoverNode !== undefined) {
-      setHoverNode(externalHoverNode);
+      if (externalHoverNode === null) {
+        setHoverNode(null);
+      } else {
+        const targetNodes = is2DMode ? data.nodes : visibleData.nodes;
+        const isHoverNodeVisible = externalHoverNode.isRingNode || targetNodes.some((n: any) => n.id === externalHoverNode.id);
+        if (isHoverNodeVisible) {
+          setHoverNode(externalHoverNode);
+        } else {
+          setHoverNode(null);
+        }
+      }
     }
-  }, [externalHoverNode]);
+  }, [externalHoverNode, is2DMode, data.nodes, visibleData.nodes]);
 
   return (
     <div ref={containerRef} className="graph-container absolute top-16 left-0 right-0 bottom-0 bg-transparent overflow-hidden" style={{ cursor: 'default' }}>
@@ -4665,7 +4675,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
       )}
 
       {/* 커스텀 호버 툴팁 (position:fixed로 뷰포트 기준 배치 → 잘림 방지) */}
-      {(hoverNode || hoverLink || clickedLink) && (
+      {((hoverNode && !externalHoverNode) || hoverLink || clickedLink) && (
         <div
           ref={hoverTooltipRef}
           style={{
