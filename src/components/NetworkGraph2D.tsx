@@ -204,6 +204,7 @@ const DeviceNode = memo(({ data, isConnectable }: any) => {
                 // Restore device hover since we left the port but might still be on device
                 if (data.onLocalHover) data.onLocalHover(data.rawNode);
               }}
+              className="!border-none !rounded-full z-10 !cursor-crosshair"
               style={{
                 left: `${leftPercent}%`,
                 top: iface.isDimmed && !ifaceHasAlarm ? '-4px' : '-4.5px',
@@ -273,7 +274,7 @@ const DeviceNode = memo(({ data, isConnectable }: any) => {
                 // Restore device hover since we left the port but might still be on device
                 if (data.onLocalHover) data.onLocalHover(data.rawNode);
               }}
-              className={`!border-none !rounded-full z-10 ${iface.isDimmed && !ifaceHasAlarm ? '!w-[4px] !h-[4px]' : '!w-[5px] !h-[5px]'}`}
+              className={`!border-none !rounded-full z-10 !cursor-crosshair ${iface.isDimmed && !ifaceHasAlarm ? '!w-[4px] !h-[4px]' : '!w-[5px] !h-[5px]'}`}
               style={{
                 left: `${leftPercent}%`,
                 bottom: iface.isDimmed && !ifaceHasAlarm ? '-4px' : '-4.5px',

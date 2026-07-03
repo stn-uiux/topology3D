@@ -101,7 +101,7 @@
   right: -5px;
   bottom: -5px;
   background-color: transparent;
-  cursor: pointer;
+  cursor: inherit;
 }
 
 .react-flow__edge.reverse-animation path.react-flow__edge-path {
