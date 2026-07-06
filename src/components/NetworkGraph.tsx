@@ -1586,7 +1586,16 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           let isMatch = false;
           let otherId = null;
 
-          if (hoverNode.isInterfaceNode) {
+          if (activeDeviceId !== null && !hoverNode.isInterfaceNode && !hoverNode.isRingNode) {
+            // 장비 뎁스 내에서 타 그룹/장비 호버 시, 포트 호버와 완전히 동일하게 활성 장비와의 직접 연결 링크만 매칭
+            if (
+              (sDevice === activeDeviceId && (tDevice === targetHoverId || t === targetHoverId)) ||
+              (tDevice === activeDeviceId && (sDevice === targetHoverId || s === targetHoverId))
+            ) {
+              isMatch = true;
+              otherId = (sDevice === activeDeviceId) ? tDevice : sDevice;
+            }
+          } else if (hoverNode.isInterfaceNode) {
             if (s === targetHoverId || t === targetHoverId) {
                isMatch = true;
                otherId = (s === targetHoverId) ? tDevice : sDevice;
@@ -1609,8 +1618,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
                   isValid = false;
                 }
               } else if (activeDeviceId !== null) {
-                const otherNode = visibleData.nodes.find((n: any) => n.id === otherId);
-                if (otherNode && otherNode.isDeviceNode && otherNode.id !== activeDeviceId) {
+                if (sDevice !== activeDeviceId && tDevice !== activeDeviceId) {
                   isValid = false;
                 }
               }
@@ -1625,7 +1633,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
                 highlightLinkIds.current.add(tempT + '-' + tempS);
               }
               // 인터페이스 호버 시, 해당 데이터 링크 양끝의 (장비<->인터페이스) 계층 링크도 강제 활성화
-              if (hoverNode.isInterfaceNode) {
+              if (hoverNode.isInterfaceNode || (activeDeviceId !== null && !hoverNode.isRingNode)) {
                 highlightLinkIds.current.add(sDevice + '-' + s);
                 highlightLinkIds.current.add(s + '-' + sDevice);
                 highlightLinkIds.current.add(tDevice + '-' + t);
@@ -1809,7 +1817,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
         });
       } else {
         const primaryNode = hoverNode || selectedNode;
-        if (primaryNode) {
+        if (activeDeviceId !== null) {
+          const pNode = visibleData.nodes.find(n => n.id === activeDeviceId);
+          // 호버 상태일 때는 호버된 대상과 무관한 현재 활성 장비 소속 링 전체가 활성화되는 것을 방지
+          if (pNode && pNode.deviceGroupId !== undefined && !hoverNode) {
+            primaryGids.add(pNode.deviceGroupId);
+          }
+        } else if (primaryNode) {
           if (primaryNode.deviceGroupId !== undefined) {
             primaryGids.add(primaryNode.deviceGroupId);
           } else if (primaryNode.isInterfaceNode && primaryNode.parentDeviceId) {
@@ -1822,9 +1836,6 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
           }
         } else if (activeGroupId !== null) {
           primaryGids.add(activeGroupId);
-        } else if (activeDeviceId !== null) {
-          const pNode = visibleData.nodes.find(n => n.id === activeDeviceId);
-          if (pNode && pNode.deviceGroupId !== undefined) primaryGids.add(pNode.deviceGroupId);
         }
       }
 
@@ -4040,7 +4051,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
   const onNodeHover = useCallback((node: GraphNode | null) => {
     if (Date.now() < ignoreHoverUntilRef.current) return;
-    if (clickedNode || clickedLink) return; // 팝오버가 고정되어 있을 때는 새로운 호버를 무시합니다.
+    if (clickedLink) return; // 팝오버(링크)가 고정되어 있을 때는 새로운 노드 호버를 무시합니다.
     let isDimmed = false;
     if (node) {
       const { selectedNode, activeGroupId, activeDeviceId, pathHighlight } = stateRef.current;
@@ -4062,7 +4073,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data, onNodeClick, e
 
   const onLinkHover = useCallback((link: GraphLink | null) => {
     if (Date.now() < ignoreHoverUntilRef.current) return;
-    if (clickedNode || clickedLink) return; // 팝오버가 고정되어 있을 때는 새로운 호버를 무시합니다.
+    if (clickedLink) return; // 팝오버(링크)가 고정되어 있을 때는 새로운 링크 호버를 무시합니다.
     // 2,3뎁스 계층 보조선(그룹-장비, 장비-포트)은 호버 이벤트를 무시하여 포인터 커서나 색상 변화가 없도록 합니다.
     if (link && ((link as any).isGroupToDevice || (link as any).isDeviceToInterface || (link as any).isHierarchyLink)) {
       setHoverLink(null);

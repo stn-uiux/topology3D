@@ -1309,7 +1309,7 @@ const NetworkGraph2DContent: React.FC<NetworkGraph2DProps> = ({
         onEdgesChange={onEdgesChange}
         onNodeClick={handleNodeClick}
         onEdgeClick={handleEdgeClick}
-        onEdgeDoubleClick={(e, edge) => props.onEdgeDoubleClick?.(edge.data?.rawLink || edge)}
+        onEdgeDoubleClick={(e, edge) => onEdgeDoubleClick?.(edge.data?.rawLink || edge)}
         onPaneClick={onPaneClick}
         nodeTypes={memoizedNodeTypes}
         nodesDraggable={false}
